@@ -51,6 +51,8 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
 
+    gamestate.startCountdown();
+
     for (String word : words) {
       toBeUsed.add(word);
     }

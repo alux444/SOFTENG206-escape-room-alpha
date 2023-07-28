@@ -2,8 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.application.Platform;
-import javafx.scene.control.Label;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -54,8 +52,9 @@ public class GameState {
     return this.time;
   }
 
-  public void startCountdown(Label timeLabel) {
+  public void startCountdown() {
     timer = new Timer();
+    System.out.println("timer ran");
 
     timer.scheduleAtFixedRate(
         new TimerTask() {
@@ -67,12 +66,6 @@ public class GameState {
             if (time <= 0) {
               System.out.println("out of time");
               timer.cancel();
-              // You may want to handle what happens when time is up here.
-              // For now, we will just update the label with "Time's up!"
-              Platform.runLater(() -> timeLabel.setText("Time's up!"));
-            } else {
-              // Update the label with the remaining time
-              Platform.runLater(() -> timeLabel.setText("Time: " + time));
             }
           }
         },
