@@ -1,11 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -20,6 +23,23 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private Text timerDisplay;
+
+  private GameState gamestate = GameState.getInstance();
+
+  private String[] words = {
+    "encapsulation",
+    "inheritance",
+    "polymorphism",
+    "interfaces",
+    "exceptions",
+    "stack",
+    "queue",
+    "node",
+    "binary search"
+  };
+
+  private ArrayList<String> toBeUsed = new ArrayList<String>();
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -30,9 +50,25 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+
+    for (String word : words) {
+      toBeUsed.add(word);
+    }
+
+    Task<Void> completionTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(0.2)
+                    .setTopP(0.5)
+                    .setMaxTokens(100);
+            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+            return null;
+          }
+        };
   }
 
   /**
@@ -84,7 +120,7 @@ public class ChatController {
     appendChatMessage(msg);
     ChatMessage lastMsg = runGpt(msg);
     if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      GameState.isRiddleResolved = true;
+      gamestate.setRiddeResolved(true);
     }
   }
 

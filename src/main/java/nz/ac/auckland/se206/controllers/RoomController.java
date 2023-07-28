@@ -16,6 +16,8 @@ public class RoomController {
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
 
+  private GameState gamestate = GameState.getInstance();
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
@@ -66,13 +68,13 @@ public class RoomController {
   public void clickDoor(MouseEvent event) throws IOException {
     System.out.println("door clicked");
 
-    if (!GameState.isRiddleResolved) {
+    if (!gamestate.getRiddleResolved()) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
       App.setRoot("chat");
       return;
     }
 
-    if (!GameState.isKeyFound) {
+    if (!gamestate.getKeyFound()) {
       showDialog(
           "Info", "Find the key!", "You resolved the riddle, now you know where the key is.");
     } else {
@@ -88,9 +90,10 @@ public class RoomController {
   @FXML
   public void clickVase(MouseEvent event) {
     System.out.println("vase clicked");
-    if (GameState.isRiddleResolved && !GameState.isKeyFound) {
+    if (gamestate.getRiddleResolved() && !gamestate.getKeyFound()) {
       showDialog("Info", "Key Found", "You found a key under the vase!");
-      GameState.isKeyFound = true;
+      gamestate.setKeyFound(true);
+      ;
     }
   }
 
