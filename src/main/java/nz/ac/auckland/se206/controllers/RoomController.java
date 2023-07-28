@@ -23,8 +23,6 @@ public class RoomController {
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
-
-    gamestate.startCountdown();
   }
 
   /**
@@ -82,7 +80,9 @@ public class RoomController {
       showDialog(
           "Info", "Find the key!", "You resolved the riddle, now you know where the key is.");
     } else {
-      showDialog("Info", "You Won!", "Good Job!");
+      showDialog("Info", "Second Riddle", "You're not done yet...");
+      App.setRoot("chat");
+      return;
     }
   }
 

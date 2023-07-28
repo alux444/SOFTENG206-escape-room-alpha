@@ -18,11 +18,13 @@ public class GameState {
   private int time;
 
   private Timer timer;
+  private boolean timerStarted;
 
   private GameState() {
     this.isRiddleResolved = false;
     this.isKeyFound = false;
     this.time = 120;
+    this.timerStarted = false;
   }
 
   public static GameState getInstance() {
@@ -53,8 +55,13 @@ public class GameState {
   }
 
   public void startCountdown() {
+    if (this.timerStarted) {
+      return;
+    }
+
     timer = new Timer();
-    System.out.println("timer ran");
+    System.out.println("timer started");
+    this.timerStarted = true;
 
     timer.scheduleAtFixedRate(
         new TimerTask() {

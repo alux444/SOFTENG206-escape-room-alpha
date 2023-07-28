@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,10 +52,16 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
 
-    gamestate.startCountdown();
-
     for (String word : words) {
       toBeUsed.add(word);
+    }
+
+    Random random = new Random();
+    String[] prompt = {"Vase"};
+
+    if (gamestate.getKeyFound() && gamestate.getRiddleResolved()) {
+      prompt[0] = toBeUsed.get(random.nextInt(10));
+      System.out.println(prompt[0]);
     }
 
     Task<Void> completionTask =
@@ -67,10 +74,13 @@ public class ChatController {
                     .setTemperature(0.2)
                     .setTopP(0.5)
                     .setMaxTokens(100);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
+            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord(prompt[0])));
             return null;
           }
         };
+
+    Thread gptThread = new Thread(completionTask, "GptSearchThread");
+    gptThread.start();
   }
 
   /**
