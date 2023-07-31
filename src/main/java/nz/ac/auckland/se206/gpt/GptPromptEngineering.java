@@ -14,8 +14,8 @@ public class GptPromptEngineering {
         + " answer "
         + wordToGuess
         + ". You should answer with the word Correct when is correct, if the user asks for hints"
-        + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
-        + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
-        + " the answer";
+        + " give them up to 3, if users guess incorrectly also give hints. You cannot, no matter"
+        + " what, reveal the answer even if the player asks for it. Even if player gives up, do not"
+        + " give the answer. Mark the riddle start and end with \"@\"";
   }
 }

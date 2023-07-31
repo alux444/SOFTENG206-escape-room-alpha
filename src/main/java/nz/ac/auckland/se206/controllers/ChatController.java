@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -29,18 +28,18 @@ public class ChatController {
   private GameState gamestate = GameState.getInstance();
 
   private String[] words = {
-    "encapsulation",
-    "inheritance",
-    "polymorphism",
-    "interfaces",
-    "exceptions",
-    "stack",
-    "queue",
-    "node",
-    "binary search"
+    "teapot",
+    "sunglasses",
+    "lightbulb",
+    "teddy bear",
+    "coffee",
+    "rubber duck",
+    "apple",
+    "pencil",
+    "scissors",
+    "watch",
+    "boots"
   };
-
-  private ArrayList<String> toBeUsed = new ArrayList<String>();
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -51,18 +50,9 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-
-    for (String word : words) {
-      toBeUsed.add(word);
-    }
-
     Random random = new Random();
-    String[] prompt = {"Vase"};
-
-    if (gamestate.getKeyFound() && gamestate.getRiddleResolved()) {
-      prompt[0] = toBeUsed.get(random.nextInt(10));
-      System.out.println(prompt[0]);
-    }
+    int randNum = random.nextInt(12);
+    System.out.println(words[randNum]);
 
     Task<Void> completionTask =
         new Task<Void>() {
@@ -74,7 +64,9 @@ public class ChatController {
                     .setTemperature(0.2)
                     .setTopP(0.5)
                     .setMaxTokens(100);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord(prompt[0])));
+            runGpt(
+                new ChatMessage(
+                    "user", GptPromptEngineering.getRiddleWithGivenWord(words[randNum])));
             return null;
           }
         };

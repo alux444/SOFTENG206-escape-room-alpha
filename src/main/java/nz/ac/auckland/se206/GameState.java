@@ -14,9 +14,11 @@ public class GameState {
 
   private static GameState instance;
 
-  // time tracker button
+  // button and images
   private Button checkTimeBtn;
   private ImageView backgroundImage;
+
+  // image type to update image
   private Image currentImage;
 
   /** Indicates whether the riddle has been resolved. */
@@ -28,7 +30,9 @@ public class GameState {
   /** Indication of time remaining */
   private int time;
 
+  /** Timer type and boolean for if timer has started */
   private Timer timer;
+
   private boolean timerStarted;
 
   /** Initial gamestate */
