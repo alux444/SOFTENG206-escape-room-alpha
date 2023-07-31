@@ -14,8 +14,8 @@ import nz.ac.auckland.se206.GameState;
 public class RoomController {
 
   @FXML private Rectangle door;
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
+  @FXML private Rectangle table;
+  @FXML private Rectangle boots;
   @FXML private Button checkTimeBtn;
 
   private GameState gamestate = GameState.getInstance();

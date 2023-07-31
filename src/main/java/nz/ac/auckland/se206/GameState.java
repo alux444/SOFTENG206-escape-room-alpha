@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.concurrent.Task;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -63,20 +64,31 @@ public class GameState {
     System.out.println("timer started");
     this.timerStarted = true;
 
-    timer.scheduleAtFixedRate(
-        new TimerTask() {
+    Task<Void> timerTask =
+        new Task<Void>() {
           @Override
-          public void run() {
-            time--;
-            System.out.println(time);
+          protected Void call() throws Exception {
 
-            if (time <= 0) {
-              System.out.println("out of time");
-              timer.cancel();
-            }
+            timer.scheduleAtFixedRate(
+                new TimerTask() {
+                  @Override
+                  public void run() {
+                    time--;
+                    System.out.println(time);
+
+                    if (time <= 0) {
+                      System.out.println("out of time");
+                      timer.cancel();
+                    }
+                  }
+                },
+                1000,
+                1000);
+            return null;
           }
-        },
-        1000,
-        1000);
+        };
+
+    Thread timerThread = new Thread(timerTask, "TimerThread");
+    timerThread.start();
   }
 }
