@@ -18,6 +18,7 @@ public class RoomController {
   @FXML private Rectangle door;
   @FXML private Rectangle table;
   @FXML private Rectangle boots;
+  @FXML private Rectangle cupboard;
   @FXML private Button checkTimeBtn;
 
   private GameState gamestate = GameState.getInstance();
@@ -92,18 +93,29 @@ public class RoomController {
   }
 
   /**
-   * Handles the click event on the vase.
+   * Handles the click event on the bots.
    *
    * @param event the mouse event
    */
   @FXML
-  public void clickVase(MouseEvent event) {
-    System.out.println("vase clicked");
+  public void clickBoots(MouseEvent event) {
+    System.out.println("boots clicked");
     if (gamestate.getRiddleResolved() && !gamestate.getKeyFound()) {
-      showDialog("Info", "Key Found", "You found a key under the vase!");
+      showDialog("Info", "Key Found", "You found a key in the boots!");
       gamestate.setKeyFound(true);
       ;
     }
+  }
+
+  /**
+   * Handles the click event on the cupboard.
+   *
+   * @param event the mouse event
+   */
+  @FXML
+  public void clickCupboard(MouseEvent event) throws IOException {
+    System.out.println("cupboard clicked");
+    App.setRoot("cupboard");
   }
 
   /**
@@ -112,8 +124,9 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickWindow(MouseEvent event) {
-    System.out.println("window clicked");
+  public void clickTable(MouseEvent event) throws IOException {
+    System.out.println("table clicked");
+    App.setRoot("table");
   }
 
   @FXML

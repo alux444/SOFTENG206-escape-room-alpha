@@ -118,8 +118,8 @@ public class GameState {
                     }
                   }
                 },
-                100,
-                100);
+                1000,
+                1000);
             return null;
           }
         };
@@ -151,7 +151,6 @@ public class GameState {
     }
 
     if (time <= 0) {
-
       System.out.println("out of time");
       timer.cancel();
       updateImage("room7");
