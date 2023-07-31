@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -13,6 +14,7 @@ import nz.ac.auckland.se206.GameState;
 /** Controller class for the room view. */
 public class RoomController {
 
+  @FXML private ImageView backgroundImage;
   @FXML private Rectangle door;
   @FXML private Rectangle table;
   @FXML private Rectangle boots;
@@ -24,6 +26,7 @@ public class RoomController {
   public void initialize() {
     // Initialization code goes here
     gamestate.setTimeButton(checkTimeBtn);
+    gamestate.setBackgroundImage(backgroundImage);
     gamestate.startCountdown();
   }
 

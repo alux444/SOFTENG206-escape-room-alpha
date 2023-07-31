@@ -10,7 +10,7 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="378.0" fitWidth="494.0" layoutX="54.0" layoutY="76.0">
+      <ImageView fx:id="backgroundImage" fitHeight="378.0" fitWidth="494.0" layoutX="54.0" layoutY="76.0">
          <image>
             <Image url="@../images/room0.png" />
          </image>
