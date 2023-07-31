@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
-  private GameState gamestate = GameState.getInstance();
 
   public static void main(final String[] args) {
     launch();
@@ -49,7 +48,5 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
     root.requestFocus();
-
-    gamestate.startCountdown();
   }
 }

@@ -2,12 +2,17 @@ package nz.ac.auckland.se206;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.control.Button;
 
 /** Represents the state of the game. */
 public class GameState {
 
   private static GameState instance;
+
+  // time tracker button
+  private Button checkTimeBtn;
 
   /** Indicates whether the riddle has been resolved. */
   private boolean isRiddleResolved;
@@ -33,6 +38,10 @@ public class GameState {
       instance = new GameState();
     }
     return instance;
+  }
+
+  public void setTimeButton(Button button) {
+    this.checkTimeBtn = button;
   }
 
   public boolean getRiddleResolved() {
@@ -75,6 +84,10 @@ public class GameState {
                   public void run() {
                     time--;
                     System.out.println(time);
+                    Platform.runLater(
+                        () -> {
+                          checkTimeBtn.setText(Integer.toString(time));
+                        });
 
                     if (time <= 0) {
                       System.out.println("out of time");
