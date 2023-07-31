@@ -23,7 +23,7 @@
       <Rectangle fx:id="sunglasses" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="111.0" layoutX="240.0" layoutY="124.0" onMouseClicked="#clickSunglasses" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
       <Rectangle fx:id="teapot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="387.0" layoutY="284.0" onMouseClicked="#clickTeapot" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
       <Rectangle fx:id="lightbulb" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="142.0" layoutX="240.0" layoutY="275.0" onMouseClicked="#clickLightbulb" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="148.0" />
-      <Button fx:id="returnBtn" layoutX="549.0" layoutY="76.0" mnemonicParsing="false" onAction="#returnRoom" text="test" />
+      <Button fx:id="returnBtn" layoutX="539.0" layoutY="76.0" mnemonicParsing="false" onAction="#returnRoom" text="Return" />
       <Rectangle fx:id="teddyBear" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="161.0" layoutX="87.0" layoutY="265.0" onMouseClicked="#clickTeddy" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
       <Rectangle fx:id="coffee" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="127.0" layoutX="106.0" layoutY="117.0" onMouseClicked="#clickCoffee" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
    </children>
