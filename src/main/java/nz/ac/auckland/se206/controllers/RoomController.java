@@ -2,9 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -23,6 +23,7 @@ public class RoomController {
   @FXML private Rectangle boots;
   @FXML private Rectangle cupboard;
   @FXML private Button checkTimeBtn;
+  @FXML private Button openChatBtn;
 
   private GameState gamestate = GameState.getInstance();
 
@@ -65,21 +66,6 @@ public class RoomController {
   }
 
   /**
-   * Displays a dialog box with the given title, header text, and message.
-   *
-   * @param title the title of the dialog box
-   * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
-   */
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
-  }
-
-  /**
    * Handles the click event on the door.
    *
    * @param event the mouse event
@@ -90,20 +76,18 @@ public class RoomController {
     System.out.println("door clicked");
 
     if (!gamestate.getRiddleResolved()) {
-      showDialog("Info", "Riddle", "You need to resolve the riddle!");
+      gamestate.showDialog("Info", "Riddle", "You need to resolve the riddle!");
       Rectangle clickedRectange = (Rectangle) event.getSource();
       Scene currentScene = clickedRectange.getScene();
       currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
       return;
-    }
-
-    if (!gamestate.getKeyFound()) {
-      showDialog(
-          "Info", "Find the key!", "You resolved the riddle, now you know where the key is.");
-    } else {
-      showDialog("Info", "Second Riddle", "You're not done yet...");
-
-      return;
+    } else if (gamestate.getRiddleResolved() && !gamestate.getKeyFound()) {
+      gamestate.showDialog(
+          "Key",
+          "Can't open the door.",
+          "You need to find the key to open the door! Where could it be?");
+    } else if (gamestate.getRiddleResolved() && gamestate.getKeyFound()) {
+      gamestate.showDialog("Escape", "You escaped!", "Congratulations!");
     }
   }
 
@@ -115,11 +99,7 @@ public class RoomController {
   @FXML
   public void clickBoots(MouseEvent event) {
     System.out.println("boots clicked");
-    if (gamestate.getRiddleResolved() && !gamestate.getKeyFound()) {
-      showDialog("Info", "Key Found", "You found a key in the boots!");
-      gamestate.setKeyFound(true);
-      ;
-    }
+    gamestate.attemptFindKey("boots");
   }
 
   /**
@@ -141,10 +121,22 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickTable(MouseEvent event) throws IOException {
+  public void clickTable(MouseEvent event) {
     System.out.println("table clicked");
     Rectangle source = (Rectangle) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
+  }
+
+  /**
+   * Handles the open chat event
+   *
+   * @param event event of clicking the button
+   */
+  @FXML
+  public void openChat(ActionEvent event) {
+    Button source = (Button) event.getSource();
+    Scene currentScene = source.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
   }
 }

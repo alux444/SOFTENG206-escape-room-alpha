@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -19,6 +20,8 @@ public class TableController {
   @FXML private Rectangle scissors;
   @FXML private Polygon watch;
   @FXML private Button returnBtn;
+
+  private GameState gamestate = GameState.getInstance();
 
   public void initialize() {}
 
@@ -50,6 +53,7 @@ public class TableController {
   @FXML
   public void clickDuck(MouseEvent event) {
     System.out.println("duck clicked");
+    gamestate.attemptFindKey("rubber duck");
   }
 
   /**
@@ -60,6 +64,7 @@ public class TableController {
   @FXML
   public void clickApple(MouseEvent event) {
     System.out.println("apple clicked");
+    gamestate.attemptFindKey("apple");
   }
 
   /**
@@ -70,6 +75,7 @@ public class TableController {
   @FXML
   public void clickPencil(MouseEvent event) {
     System.out.println("pencil clicked");
+    gamestate.attemptFindKey("pencil");
   }
 
   /**
@@ -80,6 +86,7 @@ public class TableController {
   @FXML
   public void clickScissors(MouseEvent event) {
     System.out.println("scissors clicked");
+    gamestate.attemptFindKey("scissors");
   }
 
   /**
@@ -90,6 +97,7 @@ public class TableController {
   @FXML
   public void clickWatch(MouseEvent event) {
     System.out.println("watch clicked");
+    gamestate.attemptFindKey("watch");
   }
 
   @FXML

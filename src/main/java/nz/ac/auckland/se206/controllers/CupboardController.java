@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 
@@ -19,6 +20,8 @@ public class CupboardController {
   @FXML private Rectangle teddyBear;
   @FXML private Rectangle coffee;
   @FXML private Button returnBtn;
+
+  private GameState gamestate = GameState.getInstance();
 
   public void initialize() {}
 
@@ -50,6 +53,7 @@ public class CupboardController {
   @FXML
   public void clickSunglasses(MouseEvent event) {
     System.out.println("sunglasses clicked");
+    gamestate.attemptFindKey("sunglasses");
   }
 
   /**
@@ -60,6 +64,7 @@ public class CupboardController {
   @FXML
   public void clickTeapot(MouseEvent event) {
     System.out.println("teapot clicked");
+    gamestate.attemptFindKey("teapot");
   }
 
   /**
@@ -70,6 +75,7 @@ public class CupboardController {
   @FXML
   public void clickLightbulb(MouseEvent event) {
     System.out.println("bulb clicked");
+    gamestate.attemptFindKey("lightbulb");
   }
 
   /**
@@ -80,6 +86,7 @@ public class CupboardController {
   @FXML
   public void clickTeddy(MouseEvent event) {
     System.out.println("teddy clicked");
+    gamestate.attemptFindKey("teddy bear");
   }
 
   /**
@@ -90,6 +97,7 @@ public class CupboardController {
   @FXML
   public void clickCoffee(MouseEvent event) {
     System.out.println("coffee clicked");
+    gamestate.attemptFindKey("coffee");
   }
 
   @FXML

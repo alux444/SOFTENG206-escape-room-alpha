@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,9 @@ public class GameState {
 
   /** Indicates whether the riddle has been resolved. */
   private boolean isRiddleResolved;
+
+  /** Indicated the item for which must be found after riddle is resolved. */
+  private String itemToFind;
 
   /** Indicates whether the key has been found. */
   private boolean isKeyFound;
@@ -61,6 +65,11 @@ public class GameState {
     this.backgroundImage = image;
   }
 
+  // set correct item to find
+  public void setItem(String item) {
+    this.itemToFind = item;
+  }
+
   // getter for background image
   public ImageView getBackgroundImage() {
     return this.backgroundImage;
@@ -84,8 +93,26 @@ public class GameState {
     return this.isKeyFound;
   }
 
-  public void setKeyFound(boolean status) {
-    this.isKeyFound = status;
+  public void attemptFindKey(String item) {
+    if (item == itemToFind && this.isRiddleResolved == true) {
+      this.isKeyFound = true;
+      showDialog("Key", "Key Found!", "You found the key under the " + item);
+    }
+  }
+
+  /**
+   * Displays a dialog box with the given title, header text, and message.
+   *
+   * @param title the title of the dialog box
+   * @param headerText the header text of the dialog box
+   * @param message the message content of the dialog box
+   */
+  public void showDialog(String title, String headerText, String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(headerText);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   /** updates image for background */

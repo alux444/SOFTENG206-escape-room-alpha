@@ -55,6 +55,7 @@ public class ChatController {
     Random random = new Random();
     int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
+    gamestate.setItem(words[randNum]);
 
     Task<Void> completionTask =
         new Task<Void>() {
