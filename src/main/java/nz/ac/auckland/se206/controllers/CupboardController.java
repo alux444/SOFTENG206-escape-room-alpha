@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 
 public class CupboardController {
 
@@ -90,7 +89,5 @@ public class CupboardController {
   }
 
   @FXML
-  public void returnRoom() throws IOException {
-    App.setRoot("room");
-  }
+  public void returnRoom() throws IOException {}
 }

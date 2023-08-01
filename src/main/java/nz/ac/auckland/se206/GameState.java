@@ -61,6 +61,16 @@ public class GameState {
     this.backgroundImage = image;
   }
 
+  // getter for background image
+  public ImageView getBackgroundImage() {
+    return this.backgroundImage;
+  }
+
+  // getter for current image
+  public Image getCurrentImage() {
+    return this.currentImage;
+  }
+
   // get if riddle is resolved
   public boolean getRiddleResolved() {
     return this.isRiddleResolved;

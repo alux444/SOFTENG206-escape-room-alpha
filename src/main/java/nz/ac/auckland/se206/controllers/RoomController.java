@@ -1,15 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -25,9 +28,19 @@ public class RoomController {
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
+    System.out.println("init room");
     // Initialization code goes here
     gamestate.setTimeButton(checkTimeBtn);
     gamestate.setBackgroundImage(backgroundImage);
+
+    // if the image is changed, set that image
+    if (gamestate.getCurrentImage() != null) {
+      Platform.runLater(
+          () -> {
+            backgroundImage.setImage(gamestate.getCurrentImage());
+          });
+    }
+
     gamestate.startCountdown();
   }
 
@@ -78,7 +91,7 @@ public class RoomController {
 
     if (!gamestate.getRiddleResolved()) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      App.setRoot("chat");
+
       return;
     }
 
@@ -87,7 +100,7 @@ public class RoomController {
           "Info", "Find the key!", "You resolved the riddle, now you know where the key is.");
     } else {
       showDialog("Info", "Second Riddle", "You're not done yet...");
-      App.setRoot("chat");
+
       return;
     }
   }
@@ -115,7 +128,6 @@ public class RoomController {
   @FXML
   public void clickCupboard(MouseEvent event) throws IOException {
     System.out.println("cupboard clicked");
-    App.setRoot("cupboard");
   }
 
   /**
@@ -126,7 +138,9 @@ public class RoomController {
   @FXML
   public void clickTable(MouseEvent event) throws IOException {
     System.out.println("table clicked");
-    App.setRoot("table");
+    Rectangle source = (Rectangle) event.getSource();
+    Scene sceneButtonIsIn = source.getScene();
+    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
   }
 
   @FXML
