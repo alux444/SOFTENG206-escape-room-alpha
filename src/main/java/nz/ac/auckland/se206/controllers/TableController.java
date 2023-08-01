@@ -1,12 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 
 public class TableController {
   @FXML private Rectangle rubberDuck;
@@ -89,5 +93,9 @@ public class TableController {
   }
 
   @FXML
-  public void returnRoom() throws IOException {}
+  public void returnRoom(ActionEvent event) throws IOException {
+    Button currentButton = (Button) event.getSource();
+    Scene currentScene = currentButton.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+  }
 }

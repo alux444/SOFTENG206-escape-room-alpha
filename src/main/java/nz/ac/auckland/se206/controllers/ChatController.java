@@ -50,7 +50,7 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
     Random random = new Random();
-    int randNum = random.nextInt(12);
+    int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
 
     Task<Void> completionTask =

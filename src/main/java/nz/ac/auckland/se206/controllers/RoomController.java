@@ -128,6 +128,9 @@ public class RoomController {
   @FXML
   public void clickCupboard(MouseEvent event) throws IOException {
     System.out.println("cupboard clicked");
+    Rectangle source = (Rectangle) event.getSource();
+    Scene currentScene = source.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CUPBOARD));
   }
 
   /**
@@ -139,12 +142,7 @@ public class RoomController {
   public void clickTable(MouseEvent event) throws IOException {
     System.out.println("table clicked");
     Rectangle source = (Rectangle) event.getSource();
-    Scene sceneButtonIsIn = source.getScene();
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
-  }
-
-  @FXML
-  public void checkTime() {
-    System.out.println(gamestate.getTime());
+    Scene currentScene = source.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
   }
 }
