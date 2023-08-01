@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -27,6 +28,9 @@ public class GameState {
   // image type to update image
   private Image currentImage;
 
+  /** Indicates whether the riddle has been generated yet. */
+  private boolean isRiddleGenerated;
+
   /** Indicates whether the riddle has been resolved. */
   private boolean isRiddleResolved;
 
@@ -50,6 +54,8 @@ public class GameState {
     this.isKeyFound = false;
     this.time = 120;
     this.timerStarted = false;
+    this.isRiddleGenerated = false;
+    this.itemToFind = null;
   }
 
   // returns the current instance of the gamestate. Only one will exist
@@ -104,6 +110,11 @@ public class GameState {
 
   public void runGenerateRiddle() {
     chatController.generateRiddle();
+    this.isRiddleGenerated = true;
+  }
+
+  public boolean getRiddleGenerated() {
+    return this.isRiddleGenerated;
   }
 
   public void attemptFindKey(String item) {
@@ -181,31 +192,37 @@ public class GameState {
   }
 
   private void checkTimeStatus() throws IOException {
+    if (time % 30 == 0) {
+      Random random = new Random();
+      boolean giveHint = random.nextBoolean();
+
+      if (giveHint) {
+        addHintMessage();
+      } else {
+        addUnhelpfulMessage();
+      }
+    }
+
     if (time == 105) {
       updateImage("room1");
-      chatController.addGamemasterMessage("It's getting a bit hot in here...");
+      chatController.addGamemasterMessage("Is that a fire?");
     }
 
     if (time == 85) {
       updateImage("room2");
-      chatController.addGamemasterMessage("Have you tried the door yet?");
     }
 
     if (time == 65) {
       updateImage("room3");
-      chatController.addGamemasterMessage("Maybe if you answer the riddle...");
     }
     if (time == 45) {
       updateImage("room4");
-      chatController.addGamemasterMessage("You might need a key.");
     }
     if (time == 30) {
       updateImage("room5");
-      chatController.addGamemasterMessage("You're running out of time...");
     }
     if (time == 15) {
       updateImage("room6");
-      chatController.addGamemasterMessage("You'll have to pick up the pace now.");
     }
 
     if (time <= 0) {
@@ -214,5 +231,31 @@ public class GameState {
       timer.cancel();
       updateImage("room7");
     }
+  }
+
+  private void addHintMessage() {
+    String[] hints = {
+      "Have you tried the door?",
+      "Maybe the riddle can help you out...",
+      "Have you solved the ridde?",
+      "You'll need a key to get out of here.",
+      "Maybe theres a key somewhere?"
+    };
+    Random random = new Random();
+    int randomNumber = random.nextInt(5);
+    chatController.addGamemasterMessage(hints[randomNumber]);
+  }
+
+  private void addUnhelpfulMessage() {
+    String[] hints = {
+      "It's getting hot in here.",
+      "Don't mind the smoke. It adds ambiance.",
+      "You might want to pick up the pace.",
+      "Wow, it's getting a bit warm, isn't it?",
+      "You really should get out of here."
+    };
+    Random random = new Random();
+    int randomNumber = random.nextInt(5);
+    chatController.addGamemasterMessage(hints[randomNumber]);
   }
 }

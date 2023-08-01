@@ -63,19 +63,19 @@ public class RoomController {
   public void clickDoor(MouseEvent event) throws IOException {
     System.out.println("door clicked");
 
-    if (!gamestate.getRiddleResolved()) {
+    if (!gamestate.getRiddleResolved() && !gamestate.getRiddleGenerated()) {
       gamestate.showDialog("Info", "Riddle", "You need to resolve the riddle!");
       gamestate.runGenerateRiddle();
       Rectangle clickedRectange = (Rectangle) event.getSource();
       Scene currentScene = clickedRectange.getScene();
       currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
       return;
-    } else if (gamestate.getRiddleResolved() && !gamestate.getKeyFound()) {
+    } else if (!gamestate.getKeyFound()) {
       gamestate.showDialog(
           "Key",
           "Can't open the door.",
           "You need to find the key to open the door! Where could it be?");
-    } else if (gamestate.getRiddleResolved() && gamestate.getKeyFound()) {
+    } else if (gamestate.getKeyFound()) {
       gamestate.showDialog("Escape", "You escaped!", "Congratulations!");
     }
   }

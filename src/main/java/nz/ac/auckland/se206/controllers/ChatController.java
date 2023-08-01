@@ -132,7 +132,7 @@ public class ChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            ChatMessage msg = new ChatMessage("user", message);
+            ChatMessage msg = new ChatMessage("You", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
             if (lastMsg.getRole().equals("assistant")
@@ -164,11 +164,10 @@ public class ChatController {
   /**
    * Public function to add message to the chat text area.
    *
-   * @param role the role of the sender (e.g., "user", "assistant")
    * @param message the message content to append
    */
   public void addGamemasterMessage(String message) {
-    ChatMessage msg = new ChatMessage("???", message);
+    ChatMessage msg = new ChatMessage("assistant", message);
     appendChatMessage(msg);
   }
 }
