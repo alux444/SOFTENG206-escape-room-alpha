@@ -91,7 +91,9 @@ public class RoomController {
 
     if (!gamestate.getRiddleResolved()) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
-
+      Rectangle clickedRectange = (Rectangle) event.getSource();
+      Scene currentScene = clickedRectange.getScene();
+      currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
       return;
     }
 

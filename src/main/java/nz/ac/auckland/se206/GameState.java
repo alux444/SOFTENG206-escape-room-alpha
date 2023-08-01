@@ -76,7 +76,7 @@ public class GameState {
     return this.isRiddleResolved;
   }
 
-  public void setRiddeResolved(boolean status) {
+  public void setRiddleResolved(boolean status) {
     this.isRiddleResolved = status;
   }
 
@@ -88,10 +88,7 @@ public class GameState {
     this.isKeyFound = status;
   }
 
-  public int getTime() {
-    return this.time;
-  }
-
+  /** updates image for background */
   public void updateImage(String name) throws IOException {
     this.currentImage = new Image(App.class.getResource("/images/" + name + ".png").openStream());
     Platform.runLater(

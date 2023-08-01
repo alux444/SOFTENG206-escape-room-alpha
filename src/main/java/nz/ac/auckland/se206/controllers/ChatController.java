@@ -5,11 +5,14 @@ import java.util.Random;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -119,12 +122,24 @@ public class ChatController {
       return;
     }
     inputText.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    ChatMessage lastMsg = runGpt(msg);
-    if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().startsWith("Correct")) {
-      gamestate.setRiddeResolved(true);
-    }
+
+    Task<Void> sendMessageTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            ChatMessage msg = new ChatMessage("user", message);
+            appendChatMessage(msg);
+            ChatMessage lastMsg = runGpt(msg);
+            if (lastMsg.getRole().equals("assistant")
+                && lastMsg.getContent().startsWith("Correct")) {
+              gamestate.setRiddleResolved(true);
+            }
+            return null;
+          }
+        };
+
+    Thread sendMessageThread = new Thread(sendMessageTask, "SendMessageThread");
+    sendMessageThread.start();
   }
 
   /**
@@ -135,5 +150,9 @@ public class ChatController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {}
+  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    Button clickedButton = (Button) event.getSource();
+    Scene currentScene = clickedButton.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+  }
 }
