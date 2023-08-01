@@ -9,11 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.controllers.ChatController;
 
 /** Represents the state of the game. */
 public class GameState {
 
+  // static reference to itself
   private static GameState instance;
+
+  // chat controller reference to add messages from gamemaster
+  private ChatController chatController;
 
   // button and images
   private Button checkTimeBtn;
@@ -53,6 +58,10 @@ public class GameState {
       instance = new GameState();
     }
     return instance;
+  }
+
+  public void setChatController(ChatController controller) {
+    this.chatController = controller;
   }
 
   // set reference for time tracking button
@@ -97,6 +106,7 @@ public class GameState {
     if (item == itemToFind && this.isRiddleResolved == true) {
       this.isKeyFound = true;
       showDialog("Key", "Key Found!", "You found the key under the " + item);
+      chatController.addGamemasterMessage("That looks useful.");
     }
   }
 
@@ -169,23 +179,29 @@ public class GameState {
   private void checkTimeStatus() throws IOException {
     if (time == 105) {
       updateImage("room1");
+      chatController.addGamemasterMessage("It's getting a bit hot in here...");
     }
 
     if (time == 85) {
       updateImage("room2");
+      chatController.addGamemasterMessage("Have you tried the door yet?");
     }
 
     if (time == 65) {
       updateImage("room3");
+      chatController.addGamemasterMessage("Maybe if you answer the riddle...");
     }
     if (time == 45) {
       updateImage("room4");
+      chatController.addGamemasterMessage("You might need a key.");
     }
     if (time == 30) {
       updateImage("room5");
+      chatController.addGamemasterMessage("You're running out of time...");
     }
     if (time == 15) {
       updateImage("room6");
+      chatController.addGamemasterMessage("You'll have to pick up the pace now.");
     }
 
     if (time <= 0) {

@@ -52,6 +52,8 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    gamestate.setChatController(this);
+
     Random random = new Random();
     int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
@@ -155,5 +157,16 @@ public class ChatController {
     Button clickedButton = (Button) event.getSource();
     Scene currentScene = clickedButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+  }
+
+  /**
+   * Public function to add message to the chat text area.
+   *
+   * @param role the role of the sender (e.g., "user", "assistant")
+   * @param message the message content to append
+   */
+  public void addGamemasterMessage(String message) {
+    ChatMessage msg = new ChatMessage("???", message);
+    appendChatMessage(msg);
   }
 }
