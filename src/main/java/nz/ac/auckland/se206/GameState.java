@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -47,6 +46,9 @@ public class GameState {
   private Timer timer;
 
   private boolean timerStarted;
+
+  /** boolean if game is won */
+  private boolean isGameWon;
 
   /** Initial gamestate */
   private GameState() {
@@ -125,6 +127,15 @@ public class GameState {
     }
   }
 
+  public void winGame() {
+    this.isGameWon = true;
+    timer.cancel();
+  }
+
+  public boolean getIfGameWon() {
+    return this.isGameWon;
+  }
+
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
@@ -193,13 +204,8 @@ public class GameState {
 
   private void checkTimeStatus() throws IOException {
     if (time % 30 == 0) {
-      Random random = new Random();
-      boolean giveHint = random.nextBoolean();
-
-      if (giveHint) {
-        addHintMessage();
-      } else {
-        addUnhelpfulMessage();
+      if (isRiddleResolved) {
+        chatController.addTauntMessage();
       }
     }
 
@@ -227,35 +233,8 @@ public class GameState {
 
     if (time <= 0) {
       System.out.println("out of time");
-      chatController.addGamemasterMessage("What a shame. Seems like your times run out...");
       timer.cancel();
       updateImage("room7");
     }
-  }
-
-  private void addHintMessage() {
-    String[] hints = {
-      "Have you tried the door?",
-      "Maybe the riddle can help you out...",
-      "Have you solved the ridde?",
-      "You'll need a key to get out of here.",
-      "Maybe theres a key somewhere?"
-    };
-    Random random = new Random();
-    int randomNumber = random.nextInt(5);
-    chatController.addGamemasterMessage(hints[randomNumber]);
-  }
-
-  private void addUnhelpfulMessage() {
-    String[] hints = {
-      "It's getting hot in here.",
-      "Don't mind the smoke. It adds ambiance.",
-      "You might want to pick up the pace.",
-      "Wow, it's getting a bit warm, isn't it?",
-      "You really should get out of here."
-    };
-    Random random = new Random();
-    int randomNumber = random.nextInt(5);
-    chatController.addGamemasterMessage(hints[randomNumber]);
   }
 }

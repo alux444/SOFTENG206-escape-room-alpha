@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
@@ -55,6 +56,16 @@ public class ChatController {
     gamestate.setChatController(this);
   }
 
+  /**
+   * Handles the key pressed event.
+   *
+   * @param event the key event
+   */
+  @FXML
+  public void onKeyPressed(KeyEvent event) {
+    System.out.println("key " + event.getCode() + " pressed");
+  }
+
   public void generateRiddle() {
     Random random = new Random();
     int randNum = random.nextInt(11);
@@ -88,7 +99,8 @@ public class ChatController {
    * @param msg the chat message to append
    */
   private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    String speaker = msg.getRole().equals("assistant") ? "???" : "You";
+    chatTextArea.appendText(speaker + ": " + msg.getContent() + "\n\n");
   }
 
   /**
@@ -100,6 +112,7 @@ public class ChatController {
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
+
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -109,6 +122,7 @@ public class ChatController {
     } catch (ApiProxyException e) {
       // TODO handle exception appropriately
       e.printStackTrace();
+      System.out.println("bug");
       return null;
     }
   }
@@ -132,7 +146,7 @@ public class ChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            ChatMessage msg = new ChatMessage("You", message);
+            ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
             if (lastMsg.getRole().equals("assistant")
@@ -169,5 +183,19 @@ public class ChatController {
   public void addGamemasterMessage(String message) {
     ChatMessage msg = new ChatMessage("assistant", message);
     appendChatMessage(msg);
+  }
+
+  public void addTauntMessage() {
+    Task<Void> sendTauntTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            runGpt(new ChatMessage("user", GptPromptEngineering.tauntUser()));
+            return null;
+          }
+        };
+
+    Thread sendTauntThread = new Thread(sendTauntTask, "SendMessageThread");
+    sendTauntThread.start();
   }
 }

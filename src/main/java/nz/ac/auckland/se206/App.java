@@ -48,6 +48,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addUi(AppUi.CUPBOARD, loadFxml("cupboard"));
     SceneManager.addUi(AppUi.TABLE, loadFxml("table"));
+    SceneManager.addUi(AppUi.GAMEOVER, loadFxml("gameover"));
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 600, 470);
     stage.setScene(scene);
     stage.show();
