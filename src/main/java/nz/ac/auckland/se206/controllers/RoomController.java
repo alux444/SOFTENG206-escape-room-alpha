@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -29,19 +28,8 @@ public class RoomController {
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
-    System.out.println("init room");
-    // Initialization code goes here
     gamestate.setTimeButton(checkTimeBtn);
     gamestate.setBackgroundImage(backgroundImage);
-
-    // if the image is changed, set that image
-    if (gamestate.getCurrentImage() != null) {
-      Platform.runLater(
-          () -> {
-            backgroundImage.setImage(gamestate.getCurrentImage());
-          });
-    }
-
     gamestate.startCountdown();
   }
 
@@ -77,6 +65,7 @@ public class RoomController {
 
     if (!gamestate.getRiddleResolved()) {
       gamestate.showDialog("Info", "Riddle", "You need to resolve the riddle!");
+      gamestate.runGenerateRiddle();
       Rectangle clickedRectange = (Rectangle) event.getSource();
       Scene currentScene = clickedRectange.getScene();
       currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));

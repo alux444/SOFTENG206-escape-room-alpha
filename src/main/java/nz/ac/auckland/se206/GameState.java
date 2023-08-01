@@ -102,6 +102,10 @@ public class GameState {
     return this.isKeyFound;
   }
 
+  public void runGenerateRiddle() {
+    chatController.generateRiddle();
+  }
+
   public void attemptFindKey(String item) {
     if (item == itemToFind && this.isRiddleResolved == true) {
       this.isKeyFound = true;
@@ -206,6 +210,7 @@ public class GameState {
 
     if (time <= 0) {
       System.out.println("out of time");
+      chatController.addGamemasterMessage("What a shame. Seems like your times run out...");
       timer.cancel();
       updateImage("room7");
     }

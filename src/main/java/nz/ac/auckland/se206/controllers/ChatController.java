@@ -53,7 +53,9 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
     gamestate.setChatController(this);
+  }
 
+  public void generateRiddle() {
     Random random = new Random();
     int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
