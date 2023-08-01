@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class GameoverController {
@@ -19,5 +20,11 @@ public class GameoverController {
   @FXML
   private void playAgain() {
     System.out.println("test");
+    try {
+      App app = new App();
+      app.restartApplication();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

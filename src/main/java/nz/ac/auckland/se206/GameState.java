@@ -79,6 +79,17 @@ public class GameState {
     return instance;
   }
 
+  public void resetGameState() {
+    // Reset all the game state variables to their initial values
+    this.isRiddleGenerated = false;
+    this.isRiddleResolved = false;
+    this.isKeyFound = false;
+    this.time = 120;
+    this.timerStarted = false;
+    this.itemToFind = null;
+    this.isGameWon = false;
+  }
+
   public void setChatController(ChatController controller) {
     this.chatController = controller;
   }
