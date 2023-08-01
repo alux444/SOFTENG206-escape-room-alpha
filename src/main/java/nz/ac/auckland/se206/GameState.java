@@ -228,8 +228,8 @@ public class GameState {
                     }
                   }
                 },
-                1000,
-                1000);
+                100,
+                100);
             return null;
           }
         };
@@ -247,7 +247,7 @@ public class GameState {
 
     if (time == 105) {
       updateImage("room1");
-      chatController.addGamemasterMessage("Is that a fire?");
+      chatController.addGamemasterMessage("Hmm... do you smell smoke?");
     }
 
     if (time == 85) {
@@ -256,15 +256,18 @@ public class GameState {
 
     if (time == 65) {
       updateImage("room3");
+      chatController.addGamemasterMessage("It's getting hot in here.");
     }
     if (time == 45) {
       updateImage("room4");
     }
     if (time == 30) {
       updateImage("room5");
+      chatController.addGamemasterMessage("It's getting a bit stuffy now.");
     }
     if (time == 15) {
       updateImage("room6");
+      chatController.addGamemasterMessage("Are you having trouble breathing too?");
     }
 
     if (time <= 0) {
