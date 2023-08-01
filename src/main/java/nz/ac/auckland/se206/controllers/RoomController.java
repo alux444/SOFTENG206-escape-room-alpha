@@ -77,9 +77,7 @@ public class RoomController {
           "You need to find the key to open the door! Where could it be?");
     } else if (gamestate.getKeyFound()) {
       gamestate.winGame();
-      Rectangle source = (Rectangle) event.getSource();
-      Scene currentScene = source.getScene();
-      currentScene.setRoot(SceneManager.getUiRoot(AppUi.GAMEOVER));
+      gamestate.endGame();
     }
   }
 

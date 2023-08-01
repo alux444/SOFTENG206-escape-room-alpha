@@ -11,7 +11,7 @@ public class GptPromptEngineering {
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
     return "You are a gamemaster for an escaperoom. You always reply in a poetic writing"
-        + " style. Tell me a riddle with answer "
+        + " style, with a maximum of 3 lines. Tell me a riddle with answer "
         + wordToGuess
         + ". You should answer with the word Correct when is correct, if the user asks for hints"
         + " give it to them. If users guess incorrectly also give hints. You cannot, no matter"

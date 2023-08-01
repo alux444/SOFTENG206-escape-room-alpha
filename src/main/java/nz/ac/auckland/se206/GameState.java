@@ -5,10 +5,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.ChatController;
 
 /** Represents the state of the game. */
@@ -16,6 +18,12 @@ public class GameState {
 
   // static reference to itself
   private static GameState instance;
+
+  private Scene currentScene;
+
+  public void setCurrentScene(Scene scene) {
+    this.currentScene = scene;
+  }
 
   // chat controller reference to add messages from gamemaster
   private ChatController chatController;
@@ -26,6 +34,9 @@ public class GameState {
 
   // image type to update image
   private Image currentImage;
+
+  // end screen imageview
+  private ImageView gameoverImageView;
 
   /** Indicates whether the riddle has been generated yet. */
   private boolean isRiddleGenerated;
@@ -82,14 +93,13 @@ public class GameState {
     this.backgroundImage = image;
   }
 
+  public void setEndImageView(ImageView image) {
+    this.gameoverImageView = image;
+  }
+
   // set correct item to find
   public void setItem(String item) {
     this.itemToFind = item;
-  }
-
-  // getter for background image
-  public ImageView getBackgroundImage() {
-    return this.backgroundImage;
   }
 
   // getter for current image
@@ -130,6 +140,17 @@ public class GameState {
   public void winGame() {
     this.isGameWon = true;
     timer.cancel();
+  }
+
+  public void endGame() throws IOException {
+    if (this.isGameWon) {
+      Image image = new Image(App.class.getResource("/images/victory.png").openStream());
+      gameoverImageView.setImage(image);
+    } else {
+      Image image = new Image(App.class.getResource("/images/room7.png").openStream());
+      gameoverImageView.setImage(image);
+    }
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.GAMEOVER));
   }
 
   public boolean getIfGameWon() {
@@ -234,7 +255,7 @@ public class GameState {
     if (time <= 0) {
       System.out.println("out of time");
       timer.cancel();
-      updateImage("room7");
+      endGame();
     }
   }
 }

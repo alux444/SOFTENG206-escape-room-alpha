@@ -54,6 +54,8 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
     gamestate.setChatController(this);
+    addGamemasterMessage(
+        "Welcome player. I think you shall want to get out of here as quick as you can.");
   }
 
   /**
