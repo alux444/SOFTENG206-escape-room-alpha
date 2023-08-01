@@ -54,18 +54,4 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
   }
-
-  /** Restarts the application and loads the initial scene. */
-  public void restartApplication() throws IOException {
-    SceneManager.clearSceneMap();
-    GameState.getInstance().resetGameState();
-    SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
-    SceneManager.addUi(AppUi.CUPBOARD, loadFxml("cupboard"));
-    SceneManager.addUi(AppUi.TABLE, loadFxml("table"));
-    SceneManager.addUi(AppUi.GAMEOVER, loadFxml("gameover"));
-    scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 600, 470);
-    GameState.getInstance().setCurrentScene(scene);
-    scene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
-  }
 }

@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -79,7 +80,7 @@ public class GameState {
     return instance;
   }
 
-  public void resetGameState() {
+  public void resetGameState() throws ApiProxyException, IOException {
     // Reset all the game state variables to their initial values
     this.isRiddleGenerated = false;
     this.isRiddleResolved = false;
@@ -88,6 +89,9 @@ public class GameState {
     this.timerStarted = false;
     this.itemToFind = null;
     this.isGameWon = false;
+    chatController.initialize();
+    startCountdown();
+    updateImage("room0");
   }
 
   public void setChatController(ChatController controller) {
