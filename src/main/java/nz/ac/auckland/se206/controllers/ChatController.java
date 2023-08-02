@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
@@ -25,6 +27,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
+  @FXML private TextField helperTextArea;
   @FXML private Button sendButton;
   @FXML private Text timerDisplay;
 
@@ -64,10 +67,14 @@ public class ChatController {
    * Handles the key pressed event.
    *
    * @param event the key event
+   * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " pressed");
+  public void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(new ActionEvent());
+    }
   }
 
   public void generateRiddle() {
@@ -80,6 +87,11 @@ public class ChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster is thinking...");
+                });
+
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
@@ -89,6 +101,13 @@ public class ChatController {
             runGpt(
                 new ChatMessage(
                     "user", GptPromptEngineering.getRiddleWithGivenWord(words[randNum])));
+
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster is waiting for your reply.");
+                  ;
+                });
+
             return null;
           }
         };
@@ -105,6 +124,9 @@ public class ChatController {
   private void appendChatMessage(ChatMessage msg) {
     String speaker = msg.getRole().equals("assistant") ? "???" : "You";
     chatTextArea.appendText(speaker + ": " + msg.getContent() + "\n\n");
+    if (speaker.equals("???")) {
+      gamestate.runTextToSpeech(msg.getContent());
+    }
   }
 
   /**
@@ -156,6 +178,12 @@ public class ChatController {
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               gamestate.setRiddleResolved(true);
+              Platform.runLater(
+                  () -> {
+                    helperTextArea.setText(
+                        "Nice work! Maybe the answer can help you get out of here.");
+                    ;
+                  });
             }
             return null;
           }

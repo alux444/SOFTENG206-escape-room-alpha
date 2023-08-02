@@ -235,8 +235,8 @@ public class GameState {
                     }
                   }
                 },
-                100,
-                100);
+                1000,
+                1000);
             return null;
           }
         };
@@ -256,7 +256,6 @@ public class GameState {
       updateImage("room1");
       String message = "Do you smell smoke?";
       chatController.addGamemasterMessage(message);
-      runTextToSpeech(message);
     }
 
     if (time == 85) {

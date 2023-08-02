@@ -28,7 +28,7 @@ public class GptPromptEngineering {
    * @return generated string
    */
   public static String tauntUser() {
-    return "You are the gamemaster in an escape room. which is fire themed. Generate a one line,"
-        + " poetic style, unhelpful response to taunt the user.";
+    return "You are the gamemaster in an escape room. Generate a one line,"
+        + " poetic style, unhelpful taunt to the user.";
   }
 }
