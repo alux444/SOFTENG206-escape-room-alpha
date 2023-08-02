@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -20,11 +21,11 @@ public class GameState {
   // static reference to itself
   private static GameState instance;
 
-  private Scene currentScene;
+  // text to speech instance for speaking
+  private TextToSpeech textToSpeech;
 
-  public void setCurrentScene(Scene scene) {
-    this.currentScene = scene;
-  }
+  // reference to main scene to allow for changing of scenes.
+  private Scene currentScene;
 
   // chat controller reference to add messages from gamemaster
   private ChatController chatController;
@@ -70,6 +71,7 @@ public class GameState {
     this.timerStarted = false;
     this.isRiddleGenerated = false;
     this.itemToFind = null;
+    this.textToSpeech = new TextToSpeech();
   }
 
   // returns the current instance of the gamestate. Only one will exist
@@ -92,6 +94,11 @@ public class GameState {
     chatController.initialize();
     startCountdown();
     updateImage("room0");
+  }
+
+  // sets current scene
+  public void setCurrentScene(Scene scene) {
+    this.currentScene = scene;
   }
 
   public void setChatController(ChatController controller) {
@@ -247,7 +254,9 @@ public class GameState {
 
     if (time == 105) {
       updateImage("room1");
-      chatController.addGamemasterMessage("Hmm... do you smell smoke?");
+      String message = "Do you smell smoke?";
+      chatController.addGamemasterMessage(message);
+      runTextToSpeech(message);
     }
 
     if (time == 85) {
@@ -275,5 +284,20 @@ public class GameState {
       timer.cancel();
       endGame();
     }
+  }
+
+  public void runTextToSpeech(String message) {
+    Task<Void> speakingTask =
+        new Task<Void>() {
+
+          @Override
+          protected Void call() throws Exception {
+            textToSpeech.speak(message);
+            return null;
+          }
+        };
+
+    Thread speakingThread = new Thread(speakingTask, "Speaker Thread");
+    speakingThread.start();
   }
 }
