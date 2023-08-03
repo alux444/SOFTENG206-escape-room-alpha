@@ -172,9 +172,11 @@ public class GameState {
     if (this.isGameWon) {
       Image image = new Image(App.class.getResource("/images/victory.png").openStream());
       gameoverImageView.setImage(image);
+      runTextToSpeech("Nice work buddy, you made it. Would you like to try again?");
     } else {
       Image image = new Image(App.class.getResource("/images/room8.png").openStream());
       gameoverImageView.setImage(image);
+      runTextToSpeech("Oh, what a shame. You can try again if you like.");
     }
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.GAMEOVER));
   }
@@ -239,8 +241,8 @@ public class GameState {
                     }
                   }
                 },
-                100,
-                100);
+                1000,
+                1000);
             return null;
           }
         };

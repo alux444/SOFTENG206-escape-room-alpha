@@ -6,7 +6,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameoverController">
    <children>
-      <ImageView fx:id="backgroundImage" fitHeight="378.0" fitWidth="494.0" layoutX="47.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="backgroundImage" fitHeight="378.0" fitWidth="494.0" layoutX="54.0" layoutY="76.0"/>
       <Button fx:id="playAgainBtn" layoutX="260.0" layoutY="187.0" mnemonicParsing="false" onAction="#playAgain" text="Play Again?" />
    </children>
 </Pane>
