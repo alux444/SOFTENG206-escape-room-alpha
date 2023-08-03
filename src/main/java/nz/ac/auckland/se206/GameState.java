@@ -33,6 +33,7 @@ public class GameState {
   // button and images
   private Button checkTimeBtn;
   private ImageView backgroundImage;
+  private int backgroundId;
 
   // image type to update image
   private Image currentImage;
@@ -72,6 +73,7 @@ public class GameState {
     this.isRiddleGenerated = false;
     this.itemToFind = null;
     this.textToSpeech = new TextToSpeech();
+    this.backgroundId = 1;
   }
 
   // returns the current instance of the gamestate. Only one will exist
@@ -91,6 +93,7 @@ public class GameState {
     this.timerStarted = false;
     this.itemToFind = null;
     this.isGameWon = false;
+    this.backgroundId = 1;
     chatController.initialize();
     startCountdown();
     updateImage("room0");
@@ -165,11 +168,12 @@ public class GameState {
   }
 
   public void endGame() throws IOException {
+    timer.cancel();
     if (this.isGameWon) {
       Image image = new Image(App.class.getResource("/images/victory.png").openStream());
       gameoverImageView.setImage(image);
     } else {
-      Image image = new Image(App.class.getResource("/images/room7.png").openStream());
+      Image image = new Image(App.class.getResource("/images/room8.png").openStream());
       gameoverImageView.setImage(image);
     }
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.GAMEOVER));
@@ -235,8 +239,8 @@ public class GameState {
                     }
                   }
                 },
-                1000,
-                1000);
+                100,
+                100);
             return null;
           }
         };
@@ -246,36 +250,16 @@ public class GameState {
   }
 
   private void checkTimeStatus() throws IOException {
+
     if (time % 30 == 0) {
       if (isRiddleResolved) {
         chatController.addTauntMessage();
       }
     }
 
-    if (time == 105) {
-      updateImage("room1");
-      String message = "Do you smell smoke?";
-      chatController.addGamemasterMessage(message);
-    }
-
-    if (time == 85) {
-      updateImage("room2");
-    }
-
-    if (time == 65) {
-      updateImage("room3");
-      chatController.addGamemasterMessage("It's getting hot in here.");
-    }
-    if (time == 45) {
-      updateImage("room4");
-    }
-    if (time == 30) {
-      updateImage("room5");
-      chatController.addGamemasterMessage("It's getting a bit stuffy now.");
-    }
-    if (time == 15) {
-      updateImage("room6");
-      chatController.addGamemasterMessage("Are you having trouble breathing too?");
+    if (time % 15 == 0) {
+      updateImage("room" + this.backgroundId);
+      this.backgroundId++;
     }
 
     if (time <= 0) {
