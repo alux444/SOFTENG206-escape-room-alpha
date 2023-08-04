@@ -58,9 +58,35 @@ public class ChatController {
   public void initialize() throws ApiProxyException {
     chatTextArea.clear();
     gamestate.setChatController(this);
-    addGamemasterMessage(
-        "Welcome esteemed guest. I think you shall want to get out of here as quick as you can,"
-            + " before things get heated.");
+
+    Task<Void> welcomeUserTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster is thinking...");
+                });
+
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(0.75)
+                    .setTopP(0.5)
+                    .setMaxTokens(100);
+            runGpt(new ChatMessage("user", GptPromptEngineering.welcomeUser()));
+
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster greets you.");
+                });
+
+            return null;
+          }
+        };
+
+    Thread gptWelcomeThread = new Thread(welcomeUserTask, "GptWelcomeThread");
+    gptWelcomeThread.start();
   }
 
   /**
@@ -91,13 +117,6 @@ public class ChatController {
                 () -> {
                   helperTextArea.setText("The gamemaster is thinking...");
                 });
-
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(0.2)
-                    .setTopP(0.5)
-                    .setMaxTokens(100);
             runGpt(
                 new ChatMessage(
                     "user", GptPromptEngineering.getRiddleWithGivenWord(words[randNum])));
@@ -172,6 +191,11 @@ public class ChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster is thinking...");
+                });
+
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg);
@@ -184,7 +208,13 @@ public class ChatController {
                         "Nice work! Maybe the answer can help you get out of here.");
                     ;
                   });
+              return null;
             }
+
+            Platform.runLater(
+                () -> {
+                  helperTextArea.setText("The gamemaster is waiting.");
+                });
             return null;
           }
         };

@@ -253,7 +253,7 @@ public class GameState {
 
   private void checkTimeStatus() throws IOException {
 
-    if (time % 30 == 0) {
+    if (time % 30 == 0 && time > 0) {
       if (isRiddleResolved) {
         chatController.addTauntMessage();
       }

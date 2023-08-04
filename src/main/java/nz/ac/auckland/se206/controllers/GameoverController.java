@@ -24,7 +24,7 @@ public class GameoverController {
 
   @FXML
   private void playAgain(ActionEvent event) throws ApiProxyException, IOException {
-    System.out.println("test");
+    System.out.println("game restarted");
     GameState.getInstance().resetGameState();
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();

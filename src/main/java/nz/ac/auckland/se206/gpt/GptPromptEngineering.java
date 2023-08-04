@@ -10,15 +10,14 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "You are a gamemaster for an escaperoom. You always reply in a poetic writing"
-        + " style, with a maximum of 3 lines. Tell me a riddle with answer "
+    return "Tell me a riddle with answer "
         + wordToGuess
-        + ". You should answer with the word Correct when is correct, if the user asks for hints"
-        + " give it to them. If users guess incorrectly also give hints. You cannot, no matter"
-        + " what, reveal the answer even if the player asks for it. Even if player gives up, do not"
-        + " give the answer. For this reply, only reply with the riddle. Once the player has gotten"
-        + " the riddle correct, in every response, give a hint to the player, either about"
-        + " the riddle on the door, the key needed to open the door or how the key is under the "
+        + ". Reply with a riddle ONLY. You should answer with the word Correct when is correct, if"
+        + " the user asks for hints give it to them. If users guess incorrectly also give hints."
+        + " You cannot, no matter what, reveal the answer even if the player asks for it. Even if"
+        + " player gives up, do not give the answer. Once the player has gotten the riddle correct,"
+        + " reply with \"Correct.\", in every response after that,"
+        + " give a hint to the player, alluding them to the door, a key or the "
         + wordToGuess;
   }
 
@@ -28,7 +27,18 @@ public class GptPromptEngineering {
    * @return generated string
    */
   public static String tauntUser() {
-    return "You are the gamemaster in an escape room. Generate a one line,"
-        + " poetic style, unhelpful taunt to the user.";
+    return " Generate a short, maximum 10 words, unhelpful taunt to the user similar to \"it's"
+               + " getting hot in here.\" or \"do you smell smoke?\"";
+  }
+
+  /**
+   * Generates initial prompt to welcome user.
+   *
+   * @return generated string
+   */
+  public static String welcomeUser() {
+    return "You are a gamemaster for an escaperoom. You always reply in an enthusiastic manner."
+        + " Sometimes you taunt the player about their situation. Generate a short, one line"
+        + " welcoming message.";
   }
 }
