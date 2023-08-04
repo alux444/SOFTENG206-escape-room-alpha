@@ -21,6 +21,7 @@ public class CupboardController {
   @FXML private Rectangle coffee;
   @FXML private Button returnBtn;
 
+  /** instance of gamestate */
   private GameState gamestate = GameState.getInstance();
 
   public void initialize() {}
@@ -100,6 +101,12 @@ public class CupboardController {
     gamestate.attemptFindKey("coffee");
   }
 
+  /**
+   * Handles returning for the room controller.
+   *
+   * @param event event of returning using button
+   * @throws IOException
+   */
   @FXML
   public void returnRoom(ActionEvent event) throws IOException {
     Button currentButton = (Button) event.getSource();

@@ -22,6 +22,13 @@ public class GameoverController {
     gamestate.setEndImageView(backgroundImage);
   }
 
+  /**
+   * Resets the gamestate to initial state, and allows for user to replay the game.
+   *
+   * @param event clicking of the play again button.
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   @FXML
   private void playAgain(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("game restarted");

@@ -33,6 +33,7 @@ public class ChatController {
 
   private GameState gamestate = GameState.getInstance();
 
+  /** Array of possible words taken from objects in the room. */
   private String[] words = {
     "teapot",
     "sunglasses",
@@ -50,7 +51,8 @@ public class ChatController {
   private ChatCompletionRequest chatCompletionRequest;
 
   /**
-   * Initializes the chat view, loading the riddle.
+   * Clears the chat and sets the chat controller of gamestate. Generates a welcome message for the
+   * user.
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
@@ -103,6 +105,7 @@ public class ChatController {
     }
   }
 
+  /** Generates a random riddle based in a randomly selected value from the words. */
   public void generateRiddle() {
     Random random = new Random();
     int randNum = random.nextInt(11);
@@ -247,6 +250,7 @@ public class ChatController {
     appendChatMessage(msg);
   }
 
+  /** Calls gpt to generate a taunt for the user. */
   public void addTauntMessage() {
     Task<Void> sendTauntTask =
         new Task<Void>() {

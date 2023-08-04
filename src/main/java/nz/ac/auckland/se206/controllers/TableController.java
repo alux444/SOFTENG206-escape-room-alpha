@@ -100,6 +100,12 @@ public class TableController {
     gamestate.attemptFindKey("watch");
   }
 
+  /**
+   * Returns the user to the room controller.
+   *
+   * @param event
+   * @throws IOException
+   */
   @FXML
   public void returnRoom(ActionEvent event) throws IOException {
     Button currentButton = (Button) event.getSource();

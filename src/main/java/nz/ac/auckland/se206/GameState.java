@@ -84,6 +84,12 @@ public class GameState {
     return instance;
   }
 
+  /**
+   * Resets gamestate to initial state.
+   *
+   * @throws ApiProxyException
+   * @throws IOException
+   */
   public void resetGameState() throws ApiProxyException, IOException {
     // Reset all the game state variables to their initial values
     this.isRiddleGenerated = false;
@@ -99,61 +105,116 @@ public class GameState {
     updateImage("room0");
   }
 
-  // sets current scene
+  /**
+   * Sets the current scene of the game.
+   *
+   * @param scene main scene of the game
+   */
   public void setCurrentScene(Scene scene) {
     this.currentScene = scene;
   }
 
+  /**
+   * Sets the current game's chat controller.
+   *
+   * @param controller instance of chat controller.
+   */
   public void setChatController(ChatController controller) {
     this.chatController = controller;
   }
 
-  // set reference for time tracking button
+  /**
+   * Sets the game's current time button.
+   *
+   * @param button instance of button
+   */
   public void setTimeButton(Button button) {
     this.checkTimeBtn = button;
   }
 
-  // set reference for background image
+  /**
+   * Sets the game's current background imageview instance.
+   *
+   * @param image instance of imageview.
+   */
   public void setBackgroundImage(ImageView image) {
     this.backgroundImage = image;
   }
 
+  /**
+   * Sets the game's current gameover imageview instance.
+   *
+   * @param image instance of imageview.
+   */
   public void setEndImageView(ImageView image) {
     this.gameoverImageView = image;
   }
 
-  // set correct item to find
+  /**
+   * Sets the game's current item to be found.
+   *
+   * @param item string name for item
+   */
   public void setItem(String item) {
     this.itemToFind = item;
   }
 
-  // getter for current image
+  /**
+   * Getter for current image of the game.
+   *
+   * @return image instance of currentimage
+   */
   public Image getCurrentImage() {
     return this.currentImage;
   }
 
-  // get if riddle is resolved
+  /**
+   * Getter for riddle resolved status.
+   *
+   * @return boolean of if riddle is resolveed
+   */
   public boolean getRiddleResolved() {
     return this.isRiddleResolved;
   }
 
+  /**
+   * Setter for riddle resolved status.
+   *
+   * @param status boolean status to change riddleResolved to.
+   */
   public void setRiddleResolved(boolean status) {
     this.isRiddleResolved = status;
   }
 
+  /**
+   * Returns a boolean value based on if key is found.
+   *
+   * @return boolean of if the key is found
+   */
   public boolean getKeyFound() {
     return this.isKeyFound;
   }
 
+  /** Runs the generate riddle in the chat controller, and sets riddleGenerated to true. */
   public void runGenerateRiddle() {
     chatController.generateRiddle();
     this.isRiddleGenerated = true;
   }
 
+  /**
+   * Returns the status of the riddle (if it is generated)
+   *
+   * @return boolean of if riddle is generted
+   */
   public boolean getRiddleGenerated() {
     return this.isRiddleGenerated;
   }
 
+  /**
+   * Searches for the key under an item. If the item is the item to be searched for, notify user.
+   *
+   * @param item item attempted to search for key under.
+   */
   public void attemptFindKey(String item) {
     if (item == itemToFind && this.isRiddleResolved == true) {
       this.isKeyFound = true;
@@ -162,11 +223,18 @@ public class GameState {
     }
   }
 
+  /** Sets the winning game status to true and cancels the timer. */
   public void winGame() {
     this.isGameWon = true;
     timer.cancel();
   }
 
+  /**
+   * Ends the current game, setting screen based on result of the game. Switches to the gameover
+   * scene.
+   *
+   * @throws IOException
+   */
   public void endGame() throws IOException {
     timer.cancel();
     if (this.isGameWon) {
@@ -209,7 +277,7 @@ public class GameState {
         });
   }
 
-  // function for starting countdown.
+  /** Initialises the timer countdown. */
   public void startCountdown() {
     // will not start the countdown if it has already started.
     if (this.timerStarted) {
@@ -251,6 +319,11 @@ public class GameState {
     timerThread.start();
   }
 
+  /**
+   * Validates time to check if events need to be run.
+   *
+   * @throws IOException
+   */
   private void checkTimeStatus() throws IOException {
 
     if (time % 30 == 0 && time > 0) {
@@ -271,6 +344,11 @@ public class GameState {
     }
   }
 
+  /**
+   * Runs a text to speech message to the user.
+   *
+   * @param message message to be said
+   */
   public void runTextToSpeech(String message) {
     Task<Void> speakingTask =
         new Task<Void>() {
