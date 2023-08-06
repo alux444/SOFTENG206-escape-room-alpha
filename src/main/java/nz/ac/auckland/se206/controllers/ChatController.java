@@ -12,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -29,7 +28,7 @@ public class ChatController {
   @FXML private TextField inputText;
   @FXML private TextField helperTextArea;
   @FXML private Button sendButton;
-  @FXML private Text timerDisplay;
+  @FXML private Button timeBtnChat;
 
   private GameState gamestate = GameState.getInstance();
 
@@ -60,6 +59,7 @@ public class ChatController {
   public void initialize() throws ApiProxyException {
     chatTextArea.clear();
     gamestate.setChatController(this);
+    gamestate.setTimeButton(timeBtnChat, "chat");
 
     Task<Void> welcomeUserTask =
         new Task<Void>() {

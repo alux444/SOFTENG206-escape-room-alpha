@@ -31,7 +31,10 @@ public class GameState {
   private ChatController chatController;
 
   // button and images
-  private Button checkTimeBtn;
+  private Button timeBtnRoom;
+  private Button timeBtnChat;
+  private Button timeBtnCupboard;
+  private Button timeBtnTable;
   private ImageView backgroundImage;
   private int backgroundId;
 
@@ -127,9 +130,20 @@ public class GameState {
    * Sets the game's current time button.
    *
    * @param button instance of button
+   * @param room string ofroom name
    */
-  public void setTimeButton(Button button) {
-    this.checkTimeBtn = button;
+  public void setTimeButton(Button button, String room) {
+    if (room.equals("room")) {
+      this.timeBtnRoom = button;
+    } else if (room.equals("chat")) {
+      this.timeBtnChat = button;
+    } else if (room.equals("cupboard")) {
+      this.timeBtnCupboard = button;
+    } else if (room.equals("table")) {
+      this.timeBtnTable = button;
+    } else {
+      System.out.println("Invalid room input");
+    }
   }
 
   /**
@@ -300,7 +314,10 @@ public class GameState {
                     time--;
                     Platform.runLater(
                         () -> {
-                          checkTimeBtn.setText(Integer.toString(time));
+                          timeBtnChat.setText(Integer.toString(time));
+                          timeBtnCupboard.setText(Integer.toString(time));
+                          timeBtnRoom.setText(Integer.toString(time));
+                          timeBtnTable.setText(Integer.toString(time));
                         });
                     try {
                       checkTimeStatus();

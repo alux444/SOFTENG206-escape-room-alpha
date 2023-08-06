@@ -20,11 +20,14 @@ public class CupboardController {
   @FXML private Rectangle teddyBear;
   @FXML private Rectangle coffee;
   @FXML private Button returnBtn;
+  @FXML private Button timeBtnCupboard;
 
   /** instance of gamestate */
   private GameState gamestate = GameState.getInstance();
 
-  public void initialize() {}
+  public void initialize() {
+    gamestate.setTimeButton(timeBtnCupboard, "cupboard");
+  }
 
   /**
    * Handles the key pressed event.

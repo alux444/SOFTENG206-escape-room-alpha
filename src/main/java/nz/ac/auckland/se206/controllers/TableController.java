@@ -20,10 +20,13 @@ public class TableController {
   @FXML private Rectangle scissors;
   @FXML private Polygon watch;
   @FXML private Button returnBtn;
+  @FXML private Button timeBtnTable;
 
   private GameState gamestate = GameState.getInstance();
 
-  public void initialize() {}
+  public void initialize() {
+    gamestate.setTimeButton(timeBtnTable, "table");
+  }
 
   /**
    * Handles the key pressed event.

@@ -11,6 +11,7 @@
     <TextField fx:id="inputText" layoutX="35.0" layoutY="423.0" prefHeight="26.0" prefWidth="458.0" />
     <Button fx:id="sendButton" layoutX="527.0" layoutY="404.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
     <Button layoutX="510.0" layoutY="436.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
-      <TextField fx:id="helperTextArea" editable="false" layoutX="35.0" layoutY="14.0" prefHeight="26.0" prefWidth="538.0" />
+      <TextField fx:id="helperTextArea" editable="false" layoutX="35.0" layoutY="14.0" prefHeight="26.0" prefWidth="491.0" />
+      <Button fx:id="timeBtnChat" layoutX="531.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Time" />
   </children>
 </AnchorPane>

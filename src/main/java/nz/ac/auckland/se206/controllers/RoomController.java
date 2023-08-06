@@ -21,14 +21,14 @@ public class RoomController {
   @FXML private Rectangle table;
   @FXML private Rectangle boots;
   @FXML private Rectangle cupboard;
-  @FXML private Button checkTimeBtn;
+  @FXML private Button timeBtnRoom;
   @FXML private Button openChatBtn;
 
   private GameState gamestate = GameState.getInstance();
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
-    gamestate.setTimeButton(checkTimeBtn);
+    gamestate.setTimeButton(timeBtnRoom, "room");
     gamestate.setBackgroundImage(backgroundImage);
     gamestate.startCountdown();
   }
