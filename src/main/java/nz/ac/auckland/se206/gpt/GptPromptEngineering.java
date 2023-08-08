@@ -28,7 +28,17 @@ public class GptPromptEngineering {
    */
   public static String tauntUser() {
     return " Generate a short, maximum 10 words, unhelpful taunt to the user similar to \"it's"
-               + " getting hot in here.\" or \"do you smell smoke?\"";
+        + " getting hot in here.\" or \"do you smell smoke?\"";
+  }
+
+  /**
+   * Generates a prompt to help the user
+   *
+   * @return generated string
+   */
+  public static String helpUser() {
+    return "Generate a hint for the user - allude to the riddle being the solution for their"
+               + " escape";
   }
 
   /**
