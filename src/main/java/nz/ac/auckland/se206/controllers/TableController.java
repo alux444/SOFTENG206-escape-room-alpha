@@ -110,7 +110,7 @@ public class TableController {
    * @throws IOException
    */
   @FXML
-  public void returnRoom(ActionEvent event) throws IOException {
+  public void switchToRoom(ActionEvent event) throws IOException {
     Button currentButton = (Button) event.getSource();
     Scene currentScene = currentButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));

@@ -50,8 +50,8 @@ public class ChatController {
   private ChatCompletionRequest chatCompletionRequest;
 
   /**
-   * Clears the chat and sets the chat controller of gamestate. Generates a welcome message for the
-   * user.
+   * Initialises the chat controller. Clears the chat (if there was any previous chats) and sets the
+   * chat controller of gamestate. Generates a welcome message for the user.
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
@@ -61,6 +61,8 @@ public class ChatController {
     gamestate.setChatController(this);
     gamestate.setTimeButton(timeBtnChat, "chat");
 
+    // task to set the completion request for future GPT responses, and generates the welcome
+    // message for the user.
     Task<Void> welcomeUserTask =
         new Task<Void>() {
           @Override
@@ -105,13 +107,17 @@ public class ChatController {
     }
   }
 
-  /** Generates a random riddle based in a randomly selected value from the words. */
+  /**
+   * Generates a random riddle based in a randomly selected value from the words. Calls GPT to
+   * create a riddle with the prompt as the answer, and sends the message to the user.
+   */
   public void generateRiddle() {
     Random random = new Random();
     int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
     gamestate.setItem(words[randNum]);
 
+    // task for concurrency when calling GPT to generate the user the riddle.
     Task<Void> completionTask =
         new Task<Void>() {
           @Override
@@ -176,7 +182,8 @@ public class ChatController {
   }
 
   /**
-   * Sends a message to the GPT model.
+   * Adds the users typed message and clears the input. Sends a message to the GPT model. Generates
+   * a response from GPT to the users message.
    *
    * @param event the action event triggered by the send button
    * @throws ApiProxyException if there is an error communicating with the API proxy
@@ -190,6 +197,9 @@ public class ChatController {
     }
     inputText.clear();
 
+    // a task for concurrency when sending a message - updates the player on what the gamemaster is
+    // doing.
+    // calls gpt api to call for a response from the gamemaster.
     Task<Void> sendMessageTask =
         new Task<Void>() {
           @Override
@@ -234,7 +244,7 @@ public class ChatController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+  private void switchToRoom(ActionEvent event) throws ApiProxyException, IOException {
     Button clickedButton = (Button) event.getSource();
     Scene currentScene = clickedButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));

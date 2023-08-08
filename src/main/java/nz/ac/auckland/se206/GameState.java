@@ -21,62 +21,46 @@ public class GameState {
   // static reference to itself
   private static GameState instance;
 
-  // text to speech instance for speaking
   private TextToSpeech textToSpeech;
 
-  // reference to main scene to allow for changing of scenes.
   private Scene currentScene;
-
-  // chat controller reference to add messages from gamemaster
   private ChatController chatController;
 
   // button and images
-  private Button timeBtnRoom;
   private Button timeBtnChat;
   private Button timeBtnCupboard;
   private Button timeBtnTable;
+  private Button timeBtnRoom;
   private ImageView backgroundImage;
   private int backgroundId;
-
-  // image type to update image
   private Image currentImage;
-
-  // end screen imageview
   private ImageView gameoverImageView;
 
   /** Indicates whether the riddle has been generated yet. */
   private boolean isRiddleGenerated;
 
-  /** Indicates whether the riddle has been resolved. */
   private boolean isRiddleResolved;
-
-  /** Indicated the item for which must be found after riddle is resolved. */
   private String itemToFind;
-
-  /** Indicates whether the key has been found. */
   private boolean isKeyFound;
 
-  /** Indication of time remaining */
-  private int time;
-
-  /** Timer type and boolean for if timer has started */
+  /** Timer related fields */
   private Timer timer;
 
+  private int time;
   private boolean timerStarted;
 
-  /** boolean if game is won */
   private boolean isGameWon;
 
   /** Initial gamestate */
   private GameState() {
+    this.textToSpeech = new TextToSpeech();
+    this.backgroundId = 1;
+    this.isRiddleGenerated = false;
     this.isRiddleResolved = false;
+    this.itemToFind = null;
     this.isKeyFound = false;
     this.time = 120;
     this.timerStarted = false;
-    this.isRiddleGenerated = false;
-    this.itemToFind = null;
-    this.textToSpeech = new TextToSpeech();
-    this.backgroundId = 1;
   }
 
   // returns the current instance of the gamestate. Only one will exist
@@ -291,7 +275,10 @@ public class GameState {
         });
   }
 
-  /** Initialises the timer countdown. */
+  /**
+   * Initialises the timer countdown. Updates add timer states as time decreases. Also validates
+   * time to check if any events are required to be run.
+   */
   public void startCountdown() {
     // will not start the countdown if it has already started.
     if (this.timerStarted) {
@@ -302,11 +289,12 @@ public class GameState {
     System.out.println("timer started");
     this.timerStarted = true;
 
+    // task for the update of the timer, decrements timer every second and updates GUI, aswell as
+    // validating for any events that may have to be run.
     Task<Void> timerTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-
             timer.scheduleAtFixedRate(
                 new TimerTask() {
                   @Override

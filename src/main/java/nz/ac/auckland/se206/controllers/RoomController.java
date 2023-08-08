@@ -22,6 +22,7 @@ public class RoomController {
   @FXML private Rectangle boots;
   @FXML private Rectangle cupboard;
   @FXML private Button timeBtnRoom;
+  @FXML private Button hintBtnRoom;
   @FXML private Button openChatBtn;
 
   private GameState gamestate = GameState.getInstance();
@@ -118,13 +119,16 @@ public class RoomController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
   }
 
+  @FXML
+  public void switchToHint() {}
+
   /**
    * Handles the open chat event
    *
    * @param event event of clicking the button
    */
   @FXML
-  public void openChat(ActionEvent event) {
+  public void switchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
