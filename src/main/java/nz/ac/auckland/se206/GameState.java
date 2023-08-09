@@ -36,20 +36,20 @@ public class GameState {
   private Image currentImage;
   private ImageView gameoverImageView;
 
-  /** Indicates whether the riddle has been generated yet. */
+  /** Boolean values to indicate the progress of the escape room. */
   private boolean isRiddleGenerated;
 
   private boolean isRiddleResolved;
   private String itemToFind;
+  private boolean isSafeFound;
   private boolean isKeyFound;
+  private boolean isGameWon;
 
   /** Timer related fields */
   private Timer timer;
 
   private int time;
   private boolean timerStarted;
-
-  private boolean isGameWon;
 
   /** Initial gamestate */
   private GameState() {
@@ -58,6 +58,7 @@ public class GameState {
     this.isRiddleGenerated = false;
     this.isRiddleResolved = false;
     this.itemToFind = null;
+    this.isSafeFound = false;
     this.isKeyFound = false;
     this.time = 120;
     this.timerStarted = false;
@@ -82,6 +83,7 @@ public class GameState {
     this.isRiddleGenerated = false;
     this.isRiddleResolved = false;
     this.isKeyFound = false;
+    this.isSafeFound = false;
     this.time = 120;
     this.timerStarted = false;
     this.itemToFind = null;
@@ -184,6 +186,10 @@ public class GameState {
     this.isRiddleResolved = status;
   }
 
+  public boolean getSafeFound() {
+    return this.isSafeFound;
+  }
+
   /**
    * Returns a boolean value based on if key is found.
    *
@@ -191,6 +197,10 @@ public class GameState {
    */
   public boolean getKeyFound() {
     return this.isKeyFound;
+  }
+
+  public void setKeyFound() {
+    this.isKeyFound = true;
   }
 
   /** Runs the generate riddle in the chat controller, and sets riddleGenerated to true. */
@@ -213,12 +223,12 @@ public class GameState {
    *
    * @param item item attempted to search for key under.
    */
-  public void attemptFindKey(String item) {
+  public void attemptFindSafe(String item) {
     if (item == itemToFind && this.isRiddleResolved == true) {
-      if (isKeyFound) {
+      if (isSafeFound) {
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
       } else {
-        this.isKeyFound = true;
+        this.isSafeFound = true;
         showDialog("Safe", "Is that a Safe?", "You spot a tiny safe under " + item);
         chatController.addGamemasterMessage("Can you crack the code?");
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));

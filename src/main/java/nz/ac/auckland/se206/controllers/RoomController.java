@@ -98,7 +98,7 @@ public class RoomController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
 
     System.out.println("boots clicked");
-    gamestate.attemptFindKey("boots");
+    gamestate.attemptFindSafe("boots");
   }
 
   /**

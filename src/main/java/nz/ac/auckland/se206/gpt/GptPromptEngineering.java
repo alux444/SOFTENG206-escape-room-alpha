@@ -38,7 +38,7 @@ public class GptPromptEngineering {
    */
   public static String helpUser() {
     return "Generate a hint for the user - allude to the riddle being the solution for their"
-               + " escape";
+        + " escape";
   }
 
   /**

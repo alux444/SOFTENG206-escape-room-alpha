@@ -1,14 +1,19 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
+import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class SafeController {
 
@@ -27,18 +32,92 @@ public class SafeController {
   @FXML private Button btnExit;
   @FXML private TextArea riddleText;
   @FXML private Text codeText;
+  @FXML private Text statusText;
 
   private GameState gamestate = GameState.getInstance();
   private String code = "";
+  private String solution = "";
 
   @FXML
-  private void initialize() {}
+  private void initialize() {
+    Random random = new Random();
+    for (int i = 0; i < 4; i++) {
+      int currentNumber = random.nextInt(10);
+      this.solution += Integer.toString(currentNumber);
+      for (int j = 0; j < currentNumber; j++) {
+        riddleText.setText(riddleText.getText() + Integer.toString(i + 1));
+      }
+    }
+    System.out.println(solution);
+  }
 
   @FXML
   private void pressNumber(int number) {
     if (this.code.length() < 4) {
       this.code += Integer.toString(number);
       codeText.setText(code);
+    }
+  }
+
+  /**
+   * Handles the key pressed event.
+   *
+   * @param event the key event
+   * @throws IOException
+   * @throws ApiProxyException
+   */
+  @FXML
+  public void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    KeyCode keyCode = event.getCode();
+    switch (keyCode) {
+      case BACK_SPACE:
+        clickDel();
+        break;
+      case ENTER:
+        clickSub();
+        break;
+      case DIGIT0:
+      case NUMPAD0:
+        clickZero();
+        break;
+      case DIGIT1:
+      case NUMPAD1:
+        clickOne();
+        break;
+      case DIGIT2:
+      case NUMPAD2:
+        clickTwo();
+        break;
+      case DIGIT3:
+      case NUMPAD3:
+        clickThree();
+        break;
+      case DIGIT4:
+      case NUMPAD4:
+        clickFour();
+        break;
+      case DIGIT5:
+      case NUMPAD5:
+        clickFive();
+        break;
+      case DIGIT6:
+      case NUMPAD6:
+        clickSix();
+        break;
+      case DIGIT7:
+      case NUMPAD7:
+        clickSeven();
+        break;
+      case DIGIT8:
+      case NUMPAD8:
+        clickEight();
+        break;
+      case DIGIT9:
+      case NUMPAD9:
+        clickNine();
+        break;
+      default:
+        break;
     }
   }
 
@@ -103,6 +182,12 @@ public class SafeController {
   @FXML
   public void clickSub() {
     System.out.println("sub");
+    if (this.code == this.solution) {
+      System.out.println("correct");
+      gamestate.setKeyFound();
+    } else {
+
+    }
   }
 
   @FXML

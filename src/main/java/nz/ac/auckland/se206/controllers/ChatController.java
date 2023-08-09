@@ -60,6 +60,8 @@ public class ChatController {
     chatTextArea.clear();
     gamestate.setChatController(this);
     gamestate.setTimeButton(timeBtnChat, "chat");
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.5).setMaxTokens(100);
 
     // task to set the completion request for future GPT responses, and generates the welcome
     // message for the user.
@@ -71,14 +73,7 @@ public class ChatController {
                 () -> {
                   helperTextArea.setText("The gamemaster is thinking...");
                 });
-
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(0.75)
-                    .setTopP(0.5)
-                    .setMaxTokens(100);
-            runGpt(new ChatMessage("user", GptPromptEngineering.welcomeUser()));
+            runGpt(new ChatMessage("user", GptPromptEngineering.welcomeUser()), true);
 
             Platform.runLater(
                 () -> {
@@ -128,7 +123,8 @@ public class ChatController {
                 });
             runGpt(
                 new ChatMessage(
-                    "user", GptPromptEngineering.getRiddleWithGivenWord(words[randNum])));
+                    "user", GptPromptEngineering.getRiddleWithGivenWord(words[randNum])),
+                true);
 
             Platform.runLater(
                 () -> {
@@ -164,14 +160,18 @@ public class ChatController {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg, boolean addToChat) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
 
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
+      if (addToChat) {
+        chatCompletionRequest.addMessage(result.getChatMessage());
+        appendChatMessage(result.getChatMessage());
+      } else {
+        System.out.println(result.getChatMessage().getContent());
+      }
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       // TODO handle exception appropriately
@@ -211,7 +211,7 @@ public class ChatController {
 
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
-            ChatMessage lastMsg = runGpt(msg);
+            ChatMessage lastMsg = runGpt(msg, true);
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")) {
               gamestate.setRiddleResolved(true);
@@ -266,7 +266,7 @@ public class ChatController {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            runGpt(new ChatMessage("user", GptPromptEngineering.tauntUser()));
+            runGpt(new ChatMessage("user", GptPromptEngineering.tauntUser()), true);
             return null;
           }
         };

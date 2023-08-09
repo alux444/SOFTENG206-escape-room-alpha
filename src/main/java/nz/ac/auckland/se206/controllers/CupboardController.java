@@ -57,7 +57,7 @@ public class CupboardController {
   @FXML
   public void clickSunglasses(MouseEvent event) {
     System.out.println("sunglasses clicked");
-    gamestate.attemptFindKey("sunglasses");
+    gamestate.attemptFindSafe("sunglasses");
   }
 
   /**
@@ -68,7 +68,7 @@ public class CupboardController {
   @FXML
   public void clickTeapot(MouseEvent event) {
     System.out.println("teapot clicked");
-    gamestate.attemptFindKey("teapot");
+    gamestate.attemptFindSafe("teapot");
   }
 
   /**
@@ -79,7 +79,7 @@ public class CupboardController {
   @FXML
   public void clickLightbulb(MouseEvent event) {
     System.out.println("bulb clicked");
-    gamestate.attemptFindKey("lightbulb");
+    gamestate.attemptFindSafe("lightbulb");
   }
 
   /**
@@ -90,7 +90,7 @@ public class CupboardController {
   @FXML
   public void clickTeddy(MouseEvent event) {
     System.out.println("teddy clicked");
-    gamestate.attemptFindKey("teddy bear");
+    gamestate.attemptFindSafe("teddy bear");
   }
 
   /**
@@ -101,7 +101,7 @@ public class CupboardController {
   @FXML
   public void clickCoffee(MouseEvent event) {
     System.out.println("coffee clicked");
-    gamestate.attemptFindKey("coffee");
+    gamestate.attemptFindSafe("coffee");
   }
 
   /**
