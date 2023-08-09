@@ -8,18 +8,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SafeController">
    <children>
-      <Button fx:id="btnThree" layoutX="511.0" layoutY="178.0" mnemonicParsing="false" text="3" />
-      <Button fx:id="btnSix" layoutX="510.0" layoutY="215.0" mnemonicParsing="false" text="6" />
-      <Button fx:id="btnTwo" layoutX="456.0" layoutY="178.0" mnemonicParsing="false" text="2" />
-      <Button fx:id="btnFive" layoutX="456.0" layoutY="215.0" mnemonicParsing="false" text="5" />
-      <Button fx:id="btnNine" layoutX="510.0" layoutY="254.0" mnemonicParsing="false" text="9" />
-      <Button fx:id="btnEight" layoutX="457.0" layoutY="254.0" mnemonicParsing="false" text="8" />
-      <Button fx:id="btnOne" layoutX="404.0" layoutY="178.0" mnemonicParsing="false" text="1" />
-      <Button fx:id="btnFour" layoutX="403.0" layoutY="215.0" mnemonicParsing="false" text="4" />
-      <Button fx:id="btnSeven" layoutX="403.0" layoutY="254.0" mnemonicParsing="false" text="7" />
-      <Button fx:id="btnZero" layoutX="456.0" layoutY="301.0" mnemonicParsing="false" text="0" />
-      <Button fx:id="btnDel" layoutX="402.0" layoutY="301.0" mnemonicParsing="false" text="DEL" />
-      <Button fx:id="btnSub" layoutX="502.0" layoutY="301.0" mnemonicParsing="false" text="SUB" />
+      <Button fx:id="btnThree" layoutX="511.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickThree" text="3" />
+      <Button fx:id="btnSix" layoutX="510.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickSix" text="6" />
+      <Button fx:id="btnTwo" layoutX="456.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickTwo" text="2" />
+      <Button fx:id="btnFive" layoutX="456.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickFive" text="5" />
+      <Button fx:id="btnNine" layoutX="510.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickNine" text="9" />
+      <Button fx:id="btnEight" layoutX="457.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickEight" text="8" />
+      <Button fx:id="btnOne" layoutX="404.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickOne" text="1" />
+      <Button fx:id="btnFour" layoutX="403.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickFour" text="4" />
+      <Button fx:id="btnSeven" layoutX="403.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickSeven" text="7" />
+      <Button fx:id="btnZero" layoutX="456.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickZero" text="0" />
+      <Button fx:id="btnDel" layoutX="402.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickDel" text="DEL" />
+      <Button fx:id="btnSub" layoutX="502.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickSub" text="SUB" />
       <Text fx:id="codeText" layoutX="403.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="code" wrappingWidth="139.21630859375" />
       <TextArea fx:id="riddleText" editable="false" layoutX="112.0" layoutY="128.0" prefHeight="200.0" prefWidth="200.0" text="HintText" />
       <Button fx:id="btnReturn" layoutX="509.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToBefore" text="exit" />

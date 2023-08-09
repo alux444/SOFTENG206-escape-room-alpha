@@ -91,6 +91,12 @@ public class RoomController {
    */
   @FXML
   public void clickBoots(MouseEvent event) {
+
+    // PURELY FOR TESTING
+    Rectangle source = (Rectangle) event.getSource();
+    Scene currentScene = source.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
+
     System.out.println("boots clicked");
     gamestate.attemptFindKey("boots");
   }
@@ -123,6 +129,7 @@ public class RoomController {
 
   @FXML
   public void switchToHint() {
+
     if (!gamestate.getRiddleGenerated()) {
       hintLabel.setText(("Have you tried the door?"));
       return;

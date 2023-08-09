@@ -29,9 +29,81 @@ public class SafeController {
   @FXML private Text codeText;
 
   private GameState gamestate = GameState.getInstance();
+  private String code = "";
 
   @FXML
   private void initialize() {}
+
+  @FXML
+  private void pressNumber(int number) {
+    if (this.code.length() < 4) {
+      this.code += Integer.toString(number);
+      codeText.setText(code);
+    }
+  }
+
+  @FXML
+  public void clickZero() {
+    pressNumber(0);
+  }
+
+  @FXML
+  public void clickOne() {
+    pressNumber(1);
+  }
+
+  @FXML
+  public void clickTwo() {
+    pressNumber(2);
+  }
+
+  @FXML
+  public void clickThree() {
+    pressNumber(3);
+  }
+
+  @FXML
+  public void clickFour() {
+    pressNumber(4);
+  }
+
+  @FXML
+  public void clickFive() {
+    pressNumber(1);
+  }
+
+  @FXML
+  public void clickSix() {
+    pressNumber(6);
+  }
+
+  @FXML
+  public void clickSeven() {
+    pressNumber(7);
+  }
+
+  @FXML
+  public void clickEight() {
+    pressNumber(8);
+  }
+
+  @FXML
+  public void clickNine() {
+    pressNumber(9);
+  }
+
+  @FXML
+  public void clickDel() {
+    if (this.code.length() > 0) {
+      this.code = this.code.substring(0, this.code.length() - 1);
+    }
+    codeText.setText(code);
+  }
+
+  @FXML
+  public void clickSub() {
+    System.out.println("sub");
+  }
 
   @FXML
   public void switchToBefore(ActionEvent event) {
