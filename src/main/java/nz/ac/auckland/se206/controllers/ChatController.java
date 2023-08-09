@@ -61,7 +61,7 @@ public class ChatController {
     gamestate.setChatController(this);
     gamestate.setTimeButton(timeBtnChat, "chat");
     chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.5).setTopP(0.5).setMaxTokens(100);
+        new ChatCompletionRequest().setN(1).setTemperature(0.7).setTopP(0.6).setMaxTokens(100);
 
     // task to set the completion request for future GPT responses, and generates the welcome
     // message for the user.
@@ -273,5 +273,20 @@ public class ChatController {
 
     Thread sendTauntThread = new Thread(sendTauntTask, "SendMessageThread");
     sendTauntThread.start();
+  }
+
+  /** Switches to hinting about the safe */
+  public void setToSafeTaunts() {
+    Task<Void> switchToSafeTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            runGpt(new ChatMessage("user", GptPromptEngineering.setToSafeTaunts()), true);
+            return null;
+          }
+        };
+
+    Thread safeMsgThread = new Thread(switchToSafeTask, "SafeMessageThread");
+    safeMsgThread.start();
   }
 }

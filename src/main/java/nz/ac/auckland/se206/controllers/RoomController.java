@@ -31,6 +31,7 @@ public class RoomController {
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
+    hintLabel.setText("Need a hint?");
     gamestate.setTimeButton(timeBtnRoom, "room");
     gamestate.setBackgroundImage(backgroundImage);
     gamestate.startCountdown();
@@ -92,11 +93,6 @@ public class RoomController {
   @FXML
   public void clickBoots(MouseEvent event) {
 
-    // PURELY FOR TESTING
-    Rectangle source = (Rectangle) event.getSource();
-    Scene currentScene = source.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
-
     System.out.println("boots clicked");
     gamestate.attemptFindSafe("boots");
   }
@@ -138,8 +134,12 @@ public class RoomController {
       hintLabel.setText("Maybe the riddle can give you an answer.");
       return;
     }
-    if (!gamestate.getKeyFound()) {
+    if (!gamestate.getSafeFound()) {
       hintLabel.setText("Try looking around - maybe there's something in the cupboard or table.");
+      return;
+    }
+    if (!gamestate.getKeyFound()) {
+      hintLabel.setText("Can you solve the safe code?");
       return;
     }
   }

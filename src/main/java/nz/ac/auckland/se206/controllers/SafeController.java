@@ -7,9 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.SceneManager.AppUi;
@@ -17,6 +21,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class SafeController {
 
+  @FXML private ImageView backgroundImage;
   @FXML private Button btnOne;
   @FXML private Button btnTwo;
   @FXML private Button btnThree;
@@ -30,6 +35,7 @@ public class SafeController {
   @FXML private Button btnDel;
   @FXML private Button btnSub;
   @FXML private Button btnExit;
+  @FXML private Button btnChat;
   @FXML private TextArea riddleText;
   @FXML private Text codeText;
   @FXML private Text statusText;
@@ -39,7 +45,11 @@ public class SafeController {
   private String solution = "";
 
   @FXML
-  private void initialize() {
+  private void initialize() throws IOException {
+    backgroundImage.setImage(
+        new Image(App.class.getResource("/images/safeClosed.png").openStream()));
+    riddleText.setText("");
+
     Random random = new Random();
     for (int i = 0; i < 4; i++) {
       int currentNumber = random.nextInt(10);
@@ -148,7 +158,7 @@ public class SafeController {
 
   @FXML
   public void clickFive() {
-    pressNumber(1);
+    pressNumber(5);
   }
 
   @FXML
@@ -180,13 +190,19 @@ public class SafeController {
   }
 
   @FXML
-  public void clickSub() {
+  public void clickSub() throws IOException {
     System.out.println("sub");
-    if (this.code == this.solution) {
+    if (this.code.equals(this.solution)) {
       System.out.println("correct");
       gamestate.setKeyFound();
+      statusText.setFill(Color.GREEN);
+      statusText.setText("CORRECT");
+      riddleText.setText("");
+      backgroundImage.setImage(
+          new Image(App.class.getResource("/images/safeOpen.png").openStream()));
     } else {
-
+      statusText.setFill(Color.RED);
+      statusText.setText("INCORRECT");
     }
   }
 
@@ -195,5 +211,12 @@ public class SafeController {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+  }
+
+  @FXML
+  public void switchToChat(ActionEvent event) {
+    Button source = (Button) event.getSource();
+    Scene currentScene = source.getScene();
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
   }
 }

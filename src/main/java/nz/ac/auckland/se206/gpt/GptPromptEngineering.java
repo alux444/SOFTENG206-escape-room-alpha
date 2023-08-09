@@ -17,7 +17,7 @@ public class GptPromptEngineering {
         + " You cannot, no matter what, reveal the answer even if the player asks for it. Even if"
         + " player gives up, do not give the answer. Once the player has gotten the riddle correct,"
         + " reply with \"Correct.\", in every response after that,"
-        + " give a hint to the player, alluding them to the door, a key or the "
+        + " give a hint to the player, telling them to find the "
         + wordToGuess;
   }
 
@@ -32,16 +32,6 @@ public class GptPromptEngineering {
   }
 
   /**
-   * Generates a prompt to help the user
-   *
-   * @return generated string
-   */
-  public static String helpUser() {
-    return "Generate a hint for the user - allude to the riddle being the solution for their"
-        + " escape";
-  }
-
-  /**
    * Generates initial prompt to welcome user.
    *
    * @return generated string
@@ -50,5 +40,16 @@ public class GptPromptEngineering {
     return "You are a gamemaster for an escaperoom. You always reply in an enthusiastic manner."
         + " Sometimes you taunt the player about their situation. Generate a short, one line"
         + " welcoming message.";
+  }
+
+  /**
+   * Switches GPT prompt to give hints about the safe.
+   *
+   * @return generated string
+   */
+  public static String setToSafeTaunts() {
+    return "The user has found the safe! Generate a one line response to encourage them. From now"
+        + " on, when you are taunting or hinting the user, only refer to the safe being the"
+        + " solution.";
   }
 }

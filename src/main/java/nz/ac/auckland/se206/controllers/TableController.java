@@ -56,7 +56,7 @@ public class TableController {
   @FXML
   public void clickDuck(MouseEvent event) {
     System.out.println("duck clicked");
-    gamestate.attemptFindKey("rubber duck");
+    gamestate.attemptFindSafe("rubber duck");
   }
 
   /**
@@ -67,7 +67,7 @@ public class TableController {
   @FXML
   public void clickApple(MouseEvent event) {
     System.out.println("apple clicked");
-    gamestate.attemptFindKey("apple");
+    gamestate.attemptFindSafe("apple");
   }
 
   /**
@@ -78,7 +78,7 @@ public class TableController {
   @FXML
   public void clickPencil(MouseEvent event) {
     System.out.println("pencil clicked");
-    gamestate.attemptFindKey("pencil");
+    gamestate.attemptFindSafe("pencil");
   }
 
   /**
@@ -89,7 +89,7 @@ public class TableController {
   @FXML
   public void clickScissors(MouseEvent event) {
     System.out.println("scissors clicked");
-    gamestate.attemptFindKey("scissors");
+    gamestate.attemptFindSafe("scissors");
   }
 
   /**
@@ -100,7 +100,7 @@ public class TableController {
   @FXML
   public void clickWatch(MouseEvent event) {
     System.out.println("watch clicked");
-    gamestate.attemptFindKey("watch");
+    gamestate.attemptFindSafe("watch");
   }
 
   /**

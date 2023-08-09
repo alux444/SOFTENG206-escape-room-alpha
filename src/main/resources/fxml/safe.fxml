@@ -2,35 +2,45 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SafeController">
    <children>
-      <Button fx:id="btnThree" layoutX="511.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickThree" text="3" />
-      <Button fx:id="btnSix" layoutX="510.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickSix" text="6" />
-      <Button fx:id="btnTwo" layoutX="456.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickTwo" text="2" />
-      <Button fx:id="btnFive" layoutX="456.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickFive" text="5" />
-      <Button fx:id="btnNine" layoutX="510.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickNine" text="9" />
-      <Button fx:id="btnEight" layoutX="457.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickEight" text="8" />
-      <Button fx:id="btnOne" layoutX="404.0" layoutY="178.0" mnemonicParsing="false" onAction="#clickOne" text="1" />
-      <Button fx:id="btnFour" layoutX="403.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickFour" text="4" />
-      <Button fx:id="btnSeven" layoutX="403.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickSeven" text="7" />
-      <Button fx:id="btnZero" layoutX="456.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickZero" text="0" />
-      <Button fx:id="btnDel" layoutX="402.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickDel" text="DEL" />
-      <Button fx:id="btnSub" layoutX="502.0" layoutY="301.0" mnemonicParsing="false" onAction="#clickSub" text="SUB" />
-      <Text fx:id="codeText" layoutX="403.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="139.21630859375" />
-      <TextArea fx:id="riddleText" editable="false" layoutX="112.0" layoutY="128.0" prefHeight="200.0" prefWidth="200.0" wrapText="true">
+         <ImageView fx:id="backgroundImage" fitHeight="378.0" fitWidth="494.0" layoutX="54.0" layoutY="76.0">
+         <image>
+            <Image url="@../images/safeClosed.png" />
+         </image></ImageView>
+      <Button fx:id="btnThree" layoutX="497.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickThree" text="3" />
+      <Button fx:id="btnSix" layoutX="496.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickSix" text="6" />
+      <Button fx:id="btnTwo" layoutX="452.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickTwo" text="2" />
+      <Button fx:id="btnFive" layoutX="456.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickFive" text="5" />
+      <Button fx:id="btnNine" layoutX="498.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickNine" text="9" />
+      <Button fx:id="btnEight" layoutX="456.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickEight" text="8" />
+      <Button fx:id="btnOne" layoutX="405.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickOne" text="1" />
+      <Button fx:id="btnFour" layoutX="415.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickFour" text="4" />
+      <Button fx:id="btnSeven" layoutX="416.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickSeven" text="7" />
+      <Button fx:id="btnZero" layoutX="460.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickZero" text="0" />
+      <Button fx:id="btnDel" layoutX="407.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickDel" text="DEL" />
+      <Button fx:id="btnSub" layoutX="502.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickSub" text="SUB" />
+      <Text fx:id="codeText" layoutX="410.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="124.21630859375">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <TextArea fx:id="riddleText" editable="false" layoutX="182.0" layoutY="215.0" opacity="0.0" prefHeight="173.0" prefWidth="139.0" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
       </TextArea>
       <Button fx:id="btnReturn" layoutX="509.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToBefore" text="exit" />
-      <Text fx:id="statusText" layoutX="403.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="139.21630859375">
+      <Text fx:id="statusText" layoutX="416.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="104.21630859375">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
+      <Button fx:id="btnChat" layoutX="464.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToChat" text="chat" />
    </children>
 </AnchorPane>

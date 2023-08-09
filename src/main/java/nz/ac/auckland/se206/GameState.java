@@ -201,6 +201,10 @@ public class GameState {
 
   public void setKeyFound() {
     this.isKeyFound = true;
+    showDialog(
+        "Key?",
+        "Is that a Key?",
+        "With a click, the safe opens. Inside you spot the key! Let's get out of here!");
   }
 
   /** Runs the generate riddle in the chat controller, and sets riddleGenerated to true. */
@@ -231,6 +235,7 @@ public class GameState {
         this.isSafeFound = true;
         showDialog("Safe", "Is that a Safe?", "You spot a tiny safe under " + item);
         chatController.addGamemasterMessage("Can you crack the code?");
+        chatController.setToSafeTaunts();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
       }
     }
