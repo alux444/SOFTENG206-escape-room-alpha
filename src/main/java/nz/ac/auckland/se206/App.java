@@ -49,6 +49,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CUPBOARD, loadFxml("cupboard"));
     SceneManager.addUi(AppUi.TABLE, loadFxml("table"));
     SceneManager.addUi(AppUi.GAMEOVER, loadFxml("gameover"));
+    SceneManager.addUi(AppUi.SAFE, loadFxml("safe"));
     scene = new Scene(SceneManager.getUiRoot(AppUi.ROOM), 600, 470);
     GameState.getInstance().setCurrentScene(scene);
     stage.setScene(scene);

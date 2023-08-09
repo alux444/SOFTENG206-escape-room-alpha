@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +17,7 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 /** Controller class for the room view. */
 public class RoomController {
 
+  @FXML private Label hintLabel;
   @FXML private ImageView backgroundImage;
   @FXML private Rectangle door;
   @FXML private Rectangle table;
@@ -120,7 +122,20 @@ public class RoomController {
   }
 
   @FXML
-  public void switchToHint() {}
+  public void switchToHint() {
+    if (!gamestate.getRiddleGenerated()) {
+      hintLabel.setText(("Have you tried the door?"));
+      return;
+    }
+    if (!gamestate.getRiddleResolved()) {
+      hintLabel.setText("Maybe the riddle can give you an answer.");
+      return;
+    }
+    if (!gamestate.getKeyFound()) {
+      hintLabel.setText("Try looking around - maybe there's something in the cupboard or table.");
+      return;
+    }
+  }
 
   /**
    * Handles the open chat event

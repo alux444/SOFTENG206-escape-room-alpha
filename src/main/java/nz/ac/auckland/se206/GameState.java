@@ -215,9 +215,14 @@ public class GameState {
    */
   public void attemptFindKey(String item) {
     if (item == itemToFind && this.isRiddleResolved == true) {
-      this.isKeyFound = true;
-      showDialog("Key", "Key Found!", "You found the key under the " + item);
-      chatController.addGamemasterMessage("That looks useful.");
+      if (isKeyFound) {
+        currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
+      } else {
+        this.isKeyFound = true;
+        showDialog("Safe", "Is that a Safe?", "You spot a tiny safe under " + item);
+        chatController.addGamemasterMessage("Can you crack the code?");
+        currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
+      }
     }
   }
 

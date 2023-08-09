@@ -9,7 +9,8 @@ public class SceneManager {
     CHAT,
     CUPBOARD,
     TABLE,
-    GAMEOVER
+    GAMEOVER,
+    SAFE
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
