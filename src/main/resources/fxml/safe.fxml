@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -43,5 +44,9 @@
       </Text>
       <Button fx:id="btnChat" layoutX="464.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToChat" text="chat" />
       <Button fx:id="timeBtnSafe" layoutX="420.0" layoutY="22.0" mnemonicParsing="false" text="time" />
+      <Circle fx:id="digitOne" fill="#ff1f1f" layoutX="420.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="digitTwo" fill="#ff1f1f" layoutX="447.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="digitThree" fill="#ff1f1f" layoutX="473.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="digitFour" fill="#ff1f1f" layoutX="497.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

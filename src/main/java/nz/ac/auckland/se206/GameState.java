@@ -364,7 +364,7 @@ public class GameState {
   private void checkTimeStatus() throws IOException {
 
     if (time % 30 == 0 && time > 0) {
-      if (isRiddleResolved) {
+      if (isRiddleResolved && !isKeyFound) {
         chatController.addTauntMessage();
       }
     }
@@ -398,6 +398,7 @@ public class GameState {
         };
 
     Thread speakingThread = new Thread(speakingTask, "Speaker Thread");
+    speakingThread.setDaemon(true);
     speakingThread.start();
   }
 }

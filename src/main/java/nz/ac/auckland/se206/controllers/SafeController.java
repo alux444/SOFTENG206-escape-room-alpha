@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -40,6 +41,10 @@ public class SafeController {
   @FXML private TextArea riddleText;
   @FXML private Text codeText;
   @FXML private Text statusText;
+  @FXML private Circle digitOne;
+  @FXML private Circle digitTwo;
+  @FXML private Circle digitThree;
+  @FXML private Circle digitFour;
 
   private GameState gamestate = GameState.getInstance();
   private String code = "";
@@ -50,6 +55,11 @@ public class SafeController {
    */
   @FXML
   private void initialize() throws IOException {
+    digitOne.setFill(Color.RED);
+    digitTwo.setFill(Color.RED);
+    digitThree.setFill(Color.RED);
+    digitFour.setFill(Color.RED);
+
     gamestate.setTimeButton(timeBtnSafe, "safe");
     backgroundImage.setImage(
         new Image(App.class.getResource("/images/safeClosed.png").openStream()));
@@ -209,20 +219,58 @@ public class SafeController {
   }
 
   // handles clicking of the submit
+  // checks for the correct numbers at each relative digit to green or red based on the correctness
+  // of the input.
   @FXML
   public void clickSub() throws IOException {
     System.out.println("sub");
-    if (this.code.equals(this.solution)) {
-      System.out.println("correct");
-      gamestate.setKeyFound();
-      statusText.setFill(Color.GREEN);
-      statusText.setText("CORRECT");
-      riddleText.setOpacity(0);
-      backgroundImage.setImage(
-          new Image(App.class.getResource("/images/safeOpen.png").openStream()));
-    } else {
-      statusText.setFill(Color.RED);
-      statusText.setText("INCORRECT");
+    if (this.code.length() == 4) {
+      for (int i = 0; i < 4; i++) {
+        if (code.charAt(i) == (solution.charAt(i))) {
+          switch (i) {
+            case 0:
+              digitOne.setFill(Color.GREEN);
+              break;
+            case 1:
+              digitTwo.setFill(Color.GREEN);
+              break;
+            case 2:
+              digitThree.setFill(Color.GREEN);
+              break;
+            case 3:
+              digitFour.setFill(Color.GREEN);
+              break;
+          }
+        } else {
+          switch (i) {
+            case 0:
+              digitOne.setFill(Color.RED);
+              break;
+            case 1:
+              digitTwo.setFill(Color.RED);
+              break;
+            case 2:
+              digitThree.setFill(Color.RED);
+              break;
+            case 3:
+              digitFour.setFill(Color.RED);
+              break;
+          }
+        }
+      }
+
+      if (this.code.equals(this.solution)) {
+        System.out.println("correct");
+        gamestate.setKeyFound();
+        statusText.setFill(Color.GREEN);
+        statusText.setText("CORRECT");
+        riddleText.setOpacity(0);
+        backgroundImage.setImage(
+            new Image(App.class.getResource("/images/safeOpen.png").openStream()));
+      } else {
+        statusText.setFill(Color.RED);
+        statusText.setText("INCORRECT");
+      }
     }
   }
 
