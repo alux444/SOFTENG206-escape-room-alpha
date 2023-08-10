@@ -21,6 +21,14 @@ public class GameState {
   // static reference to itself
   private static GameState instance;
 
+  // returns the current instance of the gamestate. Only one will exist
+  public static GameState getInstance() {
+    if (instance == null) {
+      instance = new GameState();
+    }
+    return instance;
+  }
+
   private TextToSpeech textToSpeech;
 
   private Scene currentScene;
@@ -63,14 +71,6 @@ public class GameState {
     this.isKeyFound = false;
     this.time = 120;
     this.timerStarted = false;
-  }
-
-  // returns the current instance of the gamestate. Only one will exist
-  public static GameState getInstance() {
-    if (instance == null) {
-      instance = new GameState();
-    }
-    return instance;
   }
 
   /**
