@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -246,7 +247,7 @@ public class ChatController {
   private void switchToRoom(ActionEvent event) throws ApiProxyException, IOException {
     Button clickedButton = (Button) event.getSource();
     Scene currentScene = clickedButton.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(SceneManager.getPrevious()));
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
   }
 
   /**

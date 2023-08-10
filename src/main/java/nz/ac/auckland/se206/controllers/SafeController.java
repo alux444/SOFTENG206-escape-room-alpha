@@ -50,6 +50,7 @@ public class SafeController {
     backgroundImage.setImage(
         new Image(App.class.getResource("/images/safeClosed.png").openStream()));
     riddleText.setText("");
+    riddleText.setOpacity(0.5);
 
     Random random = new Random();
     for (int i = 0; i < 4; i++) {
@@ -211,7 +212,7 @@ public class SafeController {
       gamestate.setKeyFound();
       statusText.setFill(Color.GREEN);
       statusText.setText("CORRECT");
-      riddleText.setText("");
+      riddleText.setOpacity(0);
       backgroundImage.setImage(
           new Image(App.class.getResource("/images/safeOpen.png").openStream()));
     } else {
@@ -220,13 +221,15 @@ public class SafeController {
     }
   }
 
+  // switches to the room root
   @FXML
   public void switchToBefore(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(SceneManager.getPrevious()));
+    currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
   }
 
+  // switches to the chat room
   @FXML
   public void switchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();

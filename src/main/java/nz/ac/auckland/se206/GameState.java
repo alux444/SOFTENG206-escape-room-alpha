@@ -80,15 +80,15 @@ public class GameState {
    */
   public void resetGameState() throws ApiProxyException, IOException {
     // Reset all the game state variables to their initial values
+    this.backgroundId = 1;
     this.isRiddleGenerated = false;
     this.isRiddleResolved = false;
-    this.isKeyFound = false;
+    this.itemToFind = null;
     this.isSafeFound = false;
+    this.isKeyFound = false;
     this.time = 120;
     this.timerStarted = false;
-    this.itemToFind = null;
     this.isGameWon = false;
-    this.backgroundId = 1;
     chatController.initialize();
     startCountdown();
     updateImage("room0");
@@ -142,6 +142,15 @@ public class GameState {
   }
 
   /**
+   * Getter for current image of the game.
+   *
+   * @return image instance of currentimage
+   */
+  public Image getCurrentImage() {
+    return this.currentImage;
+  }
+
+  /**
    * Sets the game's current gameover imageview instance.
    *
    * @param image instance of imageview.
@@ -157,15 +166,6 @@ public class GameState {
    */
   public void setItem(String item) {
     this.itemToFind = item;
-  }
-
-  /**
-   * Getter for current image of the game.
-   *
-   * @return image instance of currentimage
-   */
-  public Image getCurrentImage() {
-    return this.currentImage;
   }
 
   /**
@@ -199,12 +199,22 @@ public class GameState {
     return this.isKeyFound;
   }
 
-  public void setKeyFound() {
-    this.isKeyFound = true;
-    showDialog(
-        "Key?",
-        "Is that a Key?",
-        "With a click, the safe opens. Inside you spot the key! Let's get out of here!");
+  /**
+   * Returns the status of the riddle (if it is generated)
+   *
+   * @return boolean of if riddle is generted
+   */
+  public boolean getRiddleGenerated() {
+    return this.isRiddleGenerated;
+  }
+
+  /**
+   * getting for if this game is won.
+   *
+   * @return boolean status of victory
+   */
+  public boolean getIfGameWon() {
+    return this.isGameWon;
   }
 
   /** Runs the generate riddle in the chat controller, and sets riddleGenerated to true. */
@@ -213,13 +223,19 @@ public class GameState {
     this.isRiddleGenerated = true;
   }
 
-  /**
-   * Returns the status of the riddle (if it is generated)
-   *
-   * @return boolean of if riddle is generted
-   */
-  public boolean getRiddleGenerated() {
-    return this.isRiddleGenerated;
+  /** sets the key status to found and shows a dialog to the user. */
+  public void setKeyFound() {
+    this.isKeyFound = true;
+    showDialog(
+        "Key?",
+        "Is that a Key?",
+        "With a click, the safe opens. Inside you spot the key! Let's get out of here!");
+  }
+
+  /** Sets the winning game status to true and cancels the timer. */
+  public void winGame() {
+    this.isGameWon = true;
+    timer.cancel();
   }
 
   /**
@@ -241,12 +257,6 @@ public class GameState {
     }
   }
 
-  /** Sets the winning game status to true and cancels the timer. */
-  public void winGame() {
-    this.isGameWon = true;
-    timer.cancel();
-  }
-
   /**
    * Ends the current game, setting screen based on result of the game. Switches to the gameover
    * scene.
@@ -265,10 +275,6 @@ public class GameState {
       runTextToSpeech("Oh, what a shame. You can try again if you like.");
     }
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.GAMEOVER));
-  }
-
-  public boolean getIfGameWon() {
-    return this.isGameWon;
   }
 
   /**

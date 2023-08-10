@@ -123,6 +123,7 @@ public class RoomController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
   }
 
+  /** Sets a hint based on the current status of the game. */
   @FXML
   public void switchToHint() {
 
@@ -140,6 +141,10 @@ public class RoomController {
     }
     if (!gamestate.getKeyFound()) {
       hintLabel.setText("Can you solve the safe code?");
+      return;
+    }
+    if (gamestate.getKeyFound()) {
+      hintLabel.setText("What do you need a hint for? You have the key!");
       return;
     }
   }
