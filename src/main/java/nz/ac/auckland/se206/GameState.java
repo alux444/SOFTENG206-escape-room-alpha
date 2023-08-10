@@ -29,8 +29,9 @@ public class GameState {
   // button and images
   private Button timeBtnChat;
   private Button timeBtnCupboard;
-  private Button timeBtnTable;
   private Button timeBtnRoom;
+  private Button timeBtnSafe;
+  private Button timeBtnTable;
   private ImageView backgroundImage;
   private int backgroundId;
   private Image currentImage;
@@ -127,6 +128,8 @@ public class GameState {
       this.timeBtnCupboard = button;
     } else if (room.equals("table")) {
       this.timeBtnTable = button;
+    } else if (room.equals("safe")) {
+      this.timeBtnSafe = button;
     } else {
       System.out.println("Invalid room input");
     }
@@ -319,6 +322,8 @@ public class GameState {
     // validating for any events that may have to be run.
     Task<Void> timerTask =
         new Task<Void>() {
+          // schedules a thread for the continuous decrementing of the timer, and updates all timer
+          // value indicators for the GUI
           @Override
           protected Void call() throws Exception {
             timer.scheduleAtFixedRate(
@@ -331,6 +336,7 @@ public class GameState {
                           timeBtnChat.setText(Integer.toString(time));
                           timeBtnCupboard.setText(Integer.toString(time));
                           timeBtnRoom.setText(Integer.toString(time));
+                          timeBtnSafe.setText(Integer.toString(time));
                           timeBtnTable.setText(Integer.toString(time));
                         });
                     try {

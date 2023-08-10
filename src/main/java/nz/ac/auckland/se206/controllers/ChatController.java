@@ -104,7 +104,8 @@ public class ChatController {
 
   /**
    * Generates a random riddle based in a randomly selected value from the words. Calls GPT to
-   * create a riddle with the prompt as the answer, and sends the message to the user.
+   * create a riddle with the prompt as the answer, and sends the message to the user. Creates a
+   * task for the GPT call to generate the riddle for concurrency.
    */
   public void generateRiddle() {
     Random random = new Random();
@@ -116,6 +117,8 @@ public class ChatController {
     Task<Void> completionTask =
         new Task<Void>() {
           @Override
+          // sets the helper text area as we make the call, and runs GPT to call for the riddle
+          // prompt from prompt engineering class
           protected Void call() throws Exception {
             Platform.runLater(
                 () -> {
@@ -202,6 +205,9 @@ public class ChatController {
     // calls gpt api to call for a response from the gamemaster.
     Task<Void> sendMessageTask =
         new Task<Void>() {
+          // updates the helper text area and updates the status as we call to GPT
+          // calls for GPT to handle reply to message - if the player is replying to the riddle, and
+          // gets it correct, set riddleResolved.
           @Override
           protected Void call() throws Exception {
             Platform.runLater(
@@ -213,7 +219,8 @@ public class ChatController {
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg, true);
             if (lastMsg.getRole().equals("assistant")
-                && lastMsg.getContent().startsWith("Correct")) {
+                && lastMsg.getContent().startsWith("Correct")
+                && !gamestate.getRiddleResolved()) {
               gamestate.setRiddleResolved(true);
               Platform.runLater(
                   () -> {

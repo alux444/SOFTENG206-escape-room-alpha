@@ -36,6 +36,7 @@ public class SafeController {
   @FXML private Button btnSub;
   @FXML private Button btnExit;
   @FXML private Button btnChat;
+  @FXML private Button timeBtnSafe;
   @FXML private TextArea riddleText;
   @FXML private Text codeText;
   @FXML private Text statusText;
@@ -44,9 +45,12 @@ public class SafeController {
   private String code = "";
   private String solution = "";
 
-  /* Initialises the safe. Sets the background image and generates the code riddle and displays it to the GUI */
+  /* Initialises the safe. Sets the background image and generates the code riddle and displays it to the GUI.
+   *
+   */
   @FXML
   private void initialize() throws IOException {
+    gamestate.setTimeButton(timeBtnSafe, "safe");
     backgroundImage.setImage(
         new Image(App.class.getResource("/images/safeClosed.png").openStream()));
     riddleText.setText("");
@@ -73,7 +77,8 @@ public class SafeController {
   }
 
   /**
-   * Handles the key pressed event.
+   * Handles the key pressed event. Uses a switch case from the keyboard key pressed to result in
+   * the respective button function being run
    *
    * @param event the key event
    * @throws IOException

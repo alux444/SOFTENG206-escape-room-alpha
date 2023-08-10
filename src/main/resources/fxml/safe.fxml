@@ -42,5 +42,6 @@
          </font>
       </Text>
       <Button fx:id="btnChat" layoutX="464.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToChat" text="chat" />
+      <Button fx:id="timeBtnSafe" layoutX="420.0" layoutY="22.0" mnemonicParsing="false" text="time" />
    </children>
 </AnchorPane>
