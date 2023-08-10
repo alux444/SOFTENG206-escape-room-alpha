@@ -44,6 +44,7 @@ public class SafeController {
   private String code = "";
   private String solution = "";
 
+  /* Initialises the safe. Sets the background image and generates the code riddle and displays it to the GUI */
   @FXML
   private void initialize() throws IOException {
     backgroundImage.setImage(
@@ -61,6 +62,7 @@ public class SafeController {
     System.out.println(solution);
   }
 
+  // Handles the event where any number is pressed.
   @FXML
   private void pressNumber(int number) {
     if (this.code.length() < 4) {
@@ -131,56 +133,67 @@ public class SafeController {
     }
   }
 
+  // handles clicking of the 0
   @FXML
   public void clickZero() {
     pressNumber(0);
   }
 
+  // handles clicking of the 1
   @FXML
   public void clickOne() {
     pressNumber(1);
   }
 
+  // handles clicking of the 2
   @FXML
   public void clickTwo() {
     pressNumber(2);
   }
 
+  // handles clicking of the 3
   @FXML
   public void clickThree() {
     pressNumber(3);
   }
 
+  // handles clicking of the 4
   @FXML
   public void clickFour() {
     pressNumber(4);
   }
 
+  // handles clicking of the 5
   @FXML
   public void clickFive() {
     pressNumber(5);
   }
 
+  // handles clicking of the 6
   @FXML
   public void clickSix() {
     pressNumber(6);
   }
 
+  // handles clicking of the 7
   @FXML
   public void clickSeven() {
     pressNumber(7);
   }
 
+  // handles clicking of the 8
   @FXML
   public void clickEight() {
     pressNumber(8);
   }
 
+  // handles clicking of the 9
   @FXML
   public void clickNine() {
     pressNumber(9);
   }
 
+  // handles clicking of the delete
   @FXML
   public void clickDel() {
     if (this.code.length() > 0) {
@@ -189,6 +202,7 @@ public class SafeController {
     codeText.setText(code);
   }
 
+  // handles clicking of the submit
   @FXML
   public void clickSub() throws IOException {
     System.out.println("sub");
@@ -210,7 +224,7 @@ public class SafeController {
   public void switchToBefore(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
-    currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
+    currentScene.setRoot(SceneManager.getUiRoot(SceneManager.getPrevious()));
   }
 
   @FXML
