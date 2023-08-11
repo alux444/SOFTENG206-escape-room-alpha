@@ -110,131 +110,131 @@ public class SafeController {
     KeyCode keyCode = event.getCode();
     switch (keyCode) {
       case BACK_SPACE:
-        handleClickDel(new ActionEvent());
+        onClickDel(new ActionEvent());
         break;
       case ENTER:
-        handleClickSub(new ActionEvent());
+        onClickSub(new ActionEvent());
         break;
       case DIGIT0:
       case NUMPAD0:
-        handleClickZero(new ActionEvent());
+        onClickZero(new ActionEvent());
         break;
       case DIGIT1:
       case NUMPAD1:
-        handleClickOne(new ActionEvent());
+        onClickOne(new ActionEvent());
         break;
       case DIGIT2:
       case NUMPAD2:
-        handleClickTwo(new ActionEvent());
+        onClickTwo(new ActionEvent());
         break;
       case DIGIT3:
       case NUMPAD3:
-        handleClickThree(new ActionEvent());
+        onClickThree(new ActionEvent());
         break;
       case DIGIT4:
       case NUMPAD4:
-        handleClickFour(new ActionEvent());
+        onClickFour(new ActionEvent());
         break;
       case DIGIT5:
       case NUMPAD5:
-        handleClickFive(new ActionEvent());
+        onClickFive(new ActionEvent());
         break;
       case DIGIT6:
       case NUMPAD6:
-        handleClickSix(new ActionEvent());
+        onClickSix(new ActionEvent());
         break;
       case DIGIT7:
       case NUMPAD7:
-        handleClickSeven(new ActionEvent());
+        onClickSeven(new ActionEvent());
         break;
       case DIGIT8:
       case NUMPAD8:
-        handleClickEight(new ActionEvent());
+        onClickEight(new ActionEvent());
         break;
       case DIGIT9:
       case NUMPAD9:
-        handleClickNine(new ActionEvent());
+        onClickNine(new ActionEvent());
         break;
       default:
         break;
     }
   }
 
-  // handles clicking of the 0
+  // ons clicking of the 0
   @FXML
-  private void handleClickZero(ActionEvent action) {
+  private void onClickZero(ActionEvent action) {
     pressNumber(0);
   }
 
-  // handles clicking of the 1
+  // ons clicking of the 1
   @FXML
-  private void handleClickOne(ActionEvent action) {
+  private void onClickOne(ActionEvent action) {
     pressNumber(1);
   }
 
-  // handles clicking of the 2
+  // ons clicking of the 2
   @FXML
-  private void handleClickTwo(ActionEvent action) {
+  private void onClickTwo(ActionEvent action) {
     pressNumber(2);
   }
 
-  // handles clicking of the 3
+  // ons clicking of the 3
   @FXML
-  private void handleClickThree(ActionEvent action) {
+  private void onClickThree(ActionEvent action) {
     pressNumber(3);
   }
 
-  // handles clicking of the 4
+  // ons clicking of the 4
   @FXML
-  private void handleClickFour(ActionEvent action) {
+  private void onClickFour(ActionEvent action) {
     pressNumber(4);
   }
 
-  // handles clicking of the 5
+  // ons clicking of the 5
   @FXML
-  private void handleClickFive(ActionEvent action) {
+  private void onClickFive(ActionEvent action) {
     pressNumber(5);
   }
 
-  // handles clicking of the 6
+  // ons clicking of the 6
   @FXML
-  private void handleClickSix(ActionEvent action) {
+  private void onClickSix(ActionEvent action) {
     pressNumber(6);
   }
 
-  // handles clicking of the 7
+  // ons clicking of the 7
   @FXML
-  private void handleClickSeven(ActionEvent action) {
+  private void onClickSeven(ActionEvent action) {
     pressNumber(7);
   }
 
-  // handles clicking of the 8
+  // ons clicking of the 8
   @FXML
-  private void handleClickEight(ActionEvent action) {
+  private void onClickEight(ActionEvent action) {
     pressNumber(8);
   }
 
-  // handles clicking of the 9
+  // ons clicking of the 9
   @FXML
-  private void handleClickNine(ActionEvent action) {
+  private void onClickNine(ActionEvent action) {
     pressNumber(9);
   }
 
-  // handles clicking of the delete
+  // ons clicking of the delete
   @FXML
-  private void handleClickDel(ActionEvent action) {
+  private void onClickDel(ActionEvent action) {
     if (this.code.length() > 0) {
       this.code = this.code.substring(0, this.code.length() - 1);
     }
     codeText.setText(code);
   }
 
-  // handles clicking of the submit
+  // ons clicking of the submit
   // checks for the correct numbers at each relative digit to green or red based on the correctness
   // of the input.
   // this way hinting for the player the correctness of the inputs that they
   @FXML
-  private void handleClickSub(ActionEvent action) throws IOException {
+  private void onClickSub(ActionEvent action) throws IOException {
     System.out.println("sub");
     if (this.code.length() == 4) {
       for (int i = 0; i < 4; i++) {
@@ -293,7 +293,7 @@ public class SafeController {
 
   // switches to the room root
   @FXML
-  private void handleSwitchToBefore(ActionEvent event) {
+  private void onSwitchToBefore(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
@@ -301,7 +301,7 @@ public class SafeController {
 
   // switches to the chat room
   @FXML
-  private void handleSwitchToChat(ActionEvent event) {
+  private void onSwitchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));

@@ -56,7 +56,7 @@ public class CupboardController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickSunglasses(MouseEvent event) {
+  private void onClickSunglasses(MouseEvent event) {
     System.out.println("sunglasses clicked");
     gamestate.attemptFindSafe("sunglasses");
   }
@@ -67,7 +67,7 @@ public class CupboardController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickTeapot(MouseEvent event) {
+  private void onClickTeapot(MouseEvent event) {
     System.out.println("teapot clicked");
     gamestate.attemptFindSafe("teapot");
   }
@@ -78,7 +78,7 @@ public class CupboardController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickLightbulb(MouseEvent event) {
+  private void onClickLightbulb(MouseEvent event) {
     System.out.println("bulb clicked");
     gamestate.attemptFindSafe("lightbulb");
   }
@@ -89,7 +89,7 @@ public class CupboardController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickTeddy(MouseEvent event) {
+  private void onClickTeddy(MouseEvent event) {
     System.out.println("teddy clicked");
     gamestate.attemptFindSafe("teddy bear");
   }
@@ -100,7 +100,7 @@ public class CupboardController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickCoffee(MouseEvent event) {
+  private void onClickCoffee(MouseEvent event) {
     System.out.println("coffee clicked");
     gamestate.attemptFindSafe("coffee");
   }
@@ -112,7 +112,7 @@ public class CupboardController {
    * @throws IOException
    */
   @FXML
-  private void handleSwitchToRoom(ActionEvent event) throws IOException {
+  private void onSwitchToRoom(ActionEvent event) throws IOException {
     Button currentButton = (Button) event.getSource();
     Scene currentScene = currentButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));

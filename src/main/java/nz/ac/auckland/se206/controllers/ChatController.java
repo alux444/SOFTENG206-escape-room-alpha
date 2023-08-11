@@ -269,7 +269,7 @@ public class ChatController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void switchToRoom(ActionEvent event) throws ApiProxyException, IOException {
+  private void onSwitchToRoom(ActionEvent event) throws ApiProxyException, IOException {
     Button clickedButton = (Button) event.getSource();
     Scene currentScene = clickedButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));

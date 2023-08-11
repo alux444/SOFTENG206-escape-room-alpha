@@ -66,7 +66,7 @@ public class RoomController {
    * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  private void handleClickDoor(MouseEvent event) throws IOException {
+  private void onClickDoor(MouseEvent event) throws IOException {
     System.out.println("door clicked");
 
     if (!gamestate.getRiddleResolved() && !gamestate.getRiddleGenerated()) {
@@ -93,7 +93,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickBoots(MouseEvent event) {
+  private void onClickBoots(MouseEvent event) {
 
     System.out.println("boots clicked");
     gamestate.attemptFindSafe("boots");
@@ -105,7 +105,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickCupboard(MouseEvent event) throws IOException {
+  private void onClickCupboard(MouseEvent event) throws IOException {
     System.out.println("cupboard clicked");
     Rectangle source = (Rectangle) event.getSource();
     Scene currentScene = source.getScene();
@@ -118,7 +118,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  private void handleClickTable(MouseEvent event) {
+  private void onClickTable(MouseEvent event) {
     System.out.println("table clicked");
     Rectangle source = (Rectangle) event.getSource();
     Scene currentScene = source.getScene();
@@ -130,7 +130,7 @@ public class RoomController {
    * after 10 seconds.
    */
   @FXML
-  private void handleSwitchToHint(ActionEvent action) {
+  private void onSwitchToHint(ActionEvent action) {
 
     // the state where the riddle hasnt been generated - the user must attempt to click the door
     // first
@@ -184,7 +184,7 @@ public class RoomController {
    * @param event event of clicking the button
    */
   @FXML
-  private void handleSwitchToChat(ActionEvent event) {
+  private void onSwitchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
