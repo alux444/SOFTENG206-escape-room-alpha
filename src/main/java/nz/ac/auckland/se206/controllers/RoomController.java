@@ -125,25 +125,37 @@ public class RoomController {
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.TABLE));
   }
 
-  /** Sets a hint based on the current status of the game. */
+  /**
+   * Sets a hint based on the current status of the game. After setting the hint message, reset it
+   * after 10 seconds.
+   */
   @FXML
   private void handleSwitchToHint(ActionEvent action) {
 
+    // the state where the riddle hasnt been generated - the user must attempt to click the door
+    // first
     if (!gamestate.getRiddleGenerated()) {
       hintLabel.setText(("Have you tried the door?"));
       resetHintLabel();
       return;
     }
+
+    // if the riddle isnt resolved yet, the user can look around. the solution is in the room.
     if (!gamestate.getRiddleResolved()) {
-      hintLabel.setText("Maybe the riddle can give you an answer.");
+      hintLabel.setText(
+          "Maybe the riddle can give you an answer - the solution may be around you!");
       resetHintLabel();
       return;
     }
+
+    // lead the user to look for the item in the riddle.
     if (!gamestate.getSafeFound()) {
-      hintLabel.setText("Try looking around - maybe there's something in the cupboard or table.");
+      hintLabel.setText("Try looking around - can you find what the riddle leads you to?");
       resetHintLabel();
       return;
     }
+
+    // prompt the user to try crack the safe code
     if (!gamestate.getKeyFound()) {
       hintLabel.setText("Can you solve the safe code?");
       resetHintLabel();

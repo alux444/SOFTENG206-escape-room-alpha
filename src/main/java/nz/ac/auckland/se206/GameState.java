@@ -90,9 +90,17 @@ public class GameState {
     this.time = 120;
     this.timerStarted = false;
     this.isGameWon = false;
+    // Reinitialises the chat controller, and starts the countdown. Resets the room background
+    // image.
     chatController.initialize();
     startCountdown();
     updateImage("room0");
+    // shows the introduction dialog again.
+    showDialog(
+        "Where am I?",
+        "Where am I?",
+        "You find yourself in a strange, unfamiliar room. There's a faint whiff of smoke in the"
+            + " distance. You don't know where you are, but you should get   out - fast!");
   }
 
   /**

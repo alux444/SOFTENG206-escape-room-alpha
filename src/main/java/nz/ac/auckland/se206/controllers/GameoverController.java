@@ -23,7 +23,8 @@ public class GameoverController {
   }
 
   /**
-   * Resets the gamestate to initial state, and allows for user to replay the game.
+   * Resets the gamestate to initial state, and allows for user to replay the game. Changes the
+   * scene to the room (starting) scene.
    *
    * @param event clicking of the play again button.
    * @throws ApiProxyException
@@ -32,6 +33,7 @@ public class GameoverController {
   @FXML
   private void handleRestartGame(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("game restarted");
+    // reset the instance of the gamestate, then move the scene to the room scene.
     GameState.getInstance().resetGameState();
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();

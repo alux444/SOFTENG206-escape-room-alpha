@@ -222,12 +222,14 @@ public class SafeController {
   // handles clicking of the submit
   // checks for the correct numbers at each relative digit to green or red based on the correctness
   // of the input.
+  // this way hinting for the player the correctness of the inputs that they
   @FXML
   private void handleClickSub(ActionEvent action) throws IOException {
     System.out.println("sub");
     if (this.code.length() == 4) {
       for (int i = 0; i < 4; i++) {
         if (code.charAt(i) == (solution.charAt(i))) {
+          // switch case for setting correct values to the solution to green.
           switch (i) {
             case 0:
               digitOne.setFill(Color.GREEN);
@@ -243,6 +245,7 @@ public class SafeController {
               break;
           }
         } else {
+          // switch case for setting incorrect values to red.
           switch (i) {
             case 0:
               digitOne.setFill(Color.RED);
@@ -260,6 +263,8 @@ public class SafeController {
         }
       }
 
+      // if the solution is correct, set the gamestate status of the key to true, and change the
+      // safe background image to the open safe.
       if (this.code.equals(this.solution)) {
         System.out.println("correct");
         gamestate.setKeyFound();

@@ -219,12 +219,16 @@ public class ChatController {
                   helperTextArea.setText("The gamemaster is thinking...");
                 });
 
+            // creates a new chat message from the user for GPT to reply with. If the riddle hasnt
+            // been resolved and GPT replies with correct, we know that the user must have got the
+            // riddle correct, and so update the gamestate accordingly.
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
             ChatMessage lastMsg = runGpt(msg, true);
             if (lastMsg.getRole().equals("assistant")
                 && lastMsg.getContent().startsWith("Correct")
-                && !gamestate.getRiddleResolved()) {
+                && !gamestate.getRiddleResolved()
+                && gamestate.getRiddleGenerated()) {
               gamestate.setRiddleResolved(true);
               Platform.runLater(
                   () -> {
