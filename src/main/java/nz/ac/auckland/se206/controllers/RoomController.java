@@ -126,7 +126,7 @@ public class RoomController {
 
   /** Sets a hint based on the current status of the game. */
   @FXML
-  private void switchToHint() {
+  private void switchToHint(ActionEvent action) {
 
     if (!gamestate.getRiddleGenerated()) {
       hintLabel.setText(("Have you tried the door?"));
