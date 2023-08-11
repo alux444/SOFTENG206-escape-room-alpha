@@ -15,18 +15,18 @@
          <image>
             <Image url="@../images/safeClosed.png" />
          </image></ImageView>
-      <Button fx:id="btnThree" layoutX="497.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickThree" text="3" />
-      <Button fx:id="btnSix" layoutX="496.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickSix" text="6" />
-      <Button fx:id="btnTwo" layoutX="452.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickTwo" text="2" />
-      <Button fx:id="btnFive" layoutX="456.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickFive" text="5" />
-      <Button fx:id="btnNine" layoutX="498.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickNine" text="9" />
-      <Button fx:id="btnEight" layoutX="456.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickEight" text="8" />
-      <Button fx:id="btnOne" layoutX="405.0" layoutY="215.0" mnemonicParsing="false" onAction="#clickOne" text="1" />
-      <Button fx:id="btnFour" layoutX="415.0" layoutY="265.0" mnemonicParsing="false" onAction="#clickFour" text="4" />
-      <Button fx:id="btnSeven" layoutX="416.0" layoutY="311.0" mnemonicParsing="false" onAction="#clickSeven" text="7" />
-      <Button fx:id="btnZero" layoutX="460.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickZero" text="0" />
-      <Button fx:id="btnDel" layoutX="407.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickDel" text="DEL" />
-      <Button fx:id="btnSub" layoutX="502.0" layoutY="365.0" mnemonicParsing="false" onAction="#clickSub" text="SUB" />
+      <Button fx:id="btnThree" layoutX="497.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleClickThree" text="3" />
+      <Button fx:id="btnSix" layoutX="496.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleClickSix" text="6" />
+      <Button fx:id="btnTwo" layoutX="452.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleClickTwo" text="2" />
+      <Button fx:id="btnFive" layoutX="456.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleClickFive" text="5" />
+      <Button fx:id="btnNine" layoutX="498.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleClickNine" text="9" />
+      <Button fx:id="btnEight" layoutX="456.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleClickEight" text="8" />
+      <Button fx:id="btnOne" layoutX="405.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleClickOne" text="1" />
+      <Button fx:id="btnFour" layoutX="415.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleClickFour" text="4" />
+      <Button fx:id="btnSeven" layoutX="416.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleClickSeven" text="7" />
+      <Button fx:id="btnZero" layoutX="460.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleClickZero" text="0" />
+      <Button fx:id="btnDel" layoutX="407.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleClickDel" text="DEL" />
+      <Button fx:id="btnSub" layoutX="502.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleClickSub" text="SUB" />
       <Text fx:id="codeText" layoutX="410.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="124.21630859375">
          <font>
             <Font size="24.0" />
@@ -36,13 +36,13 @@
             <Font size="25.0" />
          </font>
       </TextArea>
-      <Button fx:id="btnReturn" layoutX="509.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToBefore" text="exit" />
+      <Button fx:id="btnReturn" layoutX="509.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSwitchToBefore" text="exit" />
       <Text fx:id="statusText" layoutX="416.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="104.21630859375">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Button fx:id="btnChat" layoutX="464.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToChat" text="chat" />
+      <Button fx:id="btnChat" layoutX="464.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleSwitchToChat" text="chat" />
       <Button fx:id="timeBtnSafe" layoutX="420.0" layoutY="22.0" mnemonicParsing="false" text="time" />
       <Circle fx:id="digitOne" fill="#ff1f1f" layoutX="420.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="digitTwo" fill="#ff1f1f" layoutX="447.0" layoutY="97.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" />

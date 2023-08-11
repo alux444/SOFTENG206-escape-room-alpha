@@ -30,7 +30,7 @@ public class GameoverController {
    * @throws IOException
    */
   @FXML
-  private void runRestartGame(ActionEvent event) throws ApiProxyException, IOException {
+  private void handleRestartGame(ActionEvent event) throws ApiProxyException, IOException {
     System.out.println("game restarted");
     GameState.getInstance().resetGameState();
     Button source = (Button) event.getSource();

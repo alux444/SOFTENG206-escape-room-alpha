@@ -20,12 +20,12 @@
             <Font name="Arial" size="14.0" />
          </font>
       </Label>
-      <Rectangle fx:id="boots" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="296.0" layoutY="333.0" onMouseClicked="#clickBoots" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Rectangle fx:id="table" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="180.0" layoutX="359.0" layoutY="273.0" onMouseClicked="#clickTable" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="190.0" />
-      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="251.0" layoutY="198.0" onMouseClicked="#clickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
+      <Rectangle fx:id="boots" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="52.0" layoutX="296.0" layoutY="333.0" onMouseClicked="#handleClickBoots" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="table" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="180.0" layoutX="359.0" layoutY="273.0" onMouseClicked="#handleClickTable" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="190.0" />
+      <Rectangle fx:id="door" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="251.0" layoutY="198.0" onMouseClicked="#handleClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
       <Button fx:id="timeBtnRoom" layoutX="460.0" layoutY="32.0" mnemonicParsing="false" text="Time" />
-      <Rectangle fx:id="cupboard" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="161.0" layoutX="87.0" layoutY="265.0" onMouseClicked="#clickCupboard" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Button fx:id="openChatBtn" layoutX="513.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToChat" text="Open Chat" />
-      <Button fx:id="hintBtnRoom" layoutX="408.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToHint" text="Hint?" />
+      <Rectangle fx:id="cupboard" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="161.0" layoutX="87.0" layoutY="265.0" onMouseClicked="#handleClickCupboard" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Button fx:id="openChatBtn" layoutX="513.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleSwitchToChat" text="Open Chat" />
+      <Button fx:id="hintBtnRoom" layoutX="408.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleSwitchToHint" text="Hint?" />
    </children>
 </Pane>

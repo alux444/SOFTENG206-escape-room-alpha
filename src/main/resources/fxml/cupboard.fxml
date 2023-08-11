@@ -20,12 +20,12 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Rectangle fx:id="sunglasses" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="111.0" layoutX="240.0" layoutY="124.0" onMouseClicked="#clickSunglasses" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
-      <Rectangle fx:id="teapot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="387.0" layoutY="284.0" onMouseClicked="#clickTeapot" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Rectangle fx:id="lightbulb" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="142.0" layoutX="240.0" layoutY="275.0" onMouseClicked="#clickLightbulb" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="148.0" />
-      <Button fx:id="returnBtn" layoutX="521.0" layoutY="32.0" mnemonicParsing="false" onAction="#switchToRoom" text="Return" />
-      <Rectangle fx:id="teddyBear" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="161.0" layoutX="87.0" layoutY="265.0" onMouseClicked="#clickTeddy" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
-      <Rectangle fx:id="coffee" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="127.0" layoutX="106.0" layoutY="117.0" onMouseClicked="#clickCoffee" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Rectangle fx:id="sunglasses" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="111.0" layoutX="240.0" layoutY="124.0" onMouseClicked="#handleClickSunglasses" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="173.0" />
+      <Rectangle fx:id="teapot" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="387.0" layoutY="284.0" onMouseClicked="#handleClickTeapot" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Rectangle fx:id="lightbulb" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="142.0" layoutX="240.0" layoutY="275.0" onMouseClicked="#handleClickLightbulb" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="148.0" />
+      <Button fx:id="returnBtn" layoutX="521.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleSwitchToRoom" text="Return" />
+      <Rectangle fx:id="teddyBear" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="161.0" layoutX="83.0" layoutY="266.0" onMouseClicked="#handleClickTeddy" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+      <Rectangle fx:id="coffee" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="127.0" layoutX="106.0" layoutY="117.0" onMouseClicked="#handleClickCoffee" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
       <Button fx:id="timeBtnCupboard" layoutX="460.0" layoutY="32.0" mnemonicParsing="false" text="Time" />
    </children>
 </Pane>
