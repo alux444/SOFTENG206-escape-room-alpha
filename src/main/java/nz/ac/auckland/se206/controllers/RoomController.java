@@ -30,7 +30,8 @@ public class RoomController {
   private GameState gamestate = GameState.getInstance();
 
   /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  @FXML
+  private void initialize() {
     hintLabel.setText("Need a hint?");
     gamestate.setTimeButton(timeBtnRoom, "room");
     gamestate.setBackgroundImage(backgroundImage);
@@ -43,7 +44,7 @@ public class RoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
+  private void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
   }
 
@@ -53,7 +54,7 @@ public class RoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyReleased(KeyEvent event) {
+  private void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
   }
 
@@ -64,7 +65,7 @@ public class RoomController {
    * @throws IOException if there is an error loading the chat view
    */
   @FXML
-  public void clickDoor(MouseEvent event) throws IOException {
+  private void clickDoor(MouseEvent event) throws IOException {
     System.out.println("door clicked");
 
     if (!gamestate.getRiddleResolved() && !gamestate.getRiddleGenerated()) {
@@ -91,7 +92,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickBoots(MouseEvent event) {
+  private void clickBoots(MouseEvent event) {
 
     System.out.println("boots clicked");
     gamestate.attemptFindSafe("boots");
@@ -103,7 +104,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickCupboard(MouseEvent event) throws IOException {
+  private void clickCupboard(MouseEvent event) throws IOException {
     System.out.println("cupboard clicked");
     Rectangle source = (Rectangle) event.getSource();
     Scene currentScene = source.getScene();
@@ -116,7 +117,7 @@ public class RoomController {
    * @param event the mouse event
    */
   @FXML
-  public void clickTable(MouseEvent event) {
+  private void clickTable(MouseEvent event) {
     System.out.println("table clicked");
     Rectangle source = (Rectangle) event.getSource();
     Scene currentScene = source.getScene();
@@ -125,7 +126,7 @@ public class RoomController {
 
   /** Sets a hint based on the current status of the game. */
   @FXML
-  public void switchToHint() {
+  private void switchToHint() {
 
     if (!gamestate.getRiddleGenerated()) {
       hintLabel.setText(("Have you tried the door?"));
@@ -155,7 +156,7 @@ public class RoomController {
    * @param event event of clicking the button
    */
   @FXML
-  public void switchToChat(ActionEvent event) {
+  private void switchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));

@@ -24,7 +24,8 @@ public class TableController {
 
   private GameState gamestate = GameState.getInstance();
 
-  public void initialize() {
+  @FXML
+  private void initialize() {
     gamestate.setTimeButton(timeBtnTable, "table");
   }
 
@@ -34,7 +35,7 @@ public class TableController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
+  private void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
   }
 
@@ -44,7 +45,7 @@ public class TableController {
    * @param event the key event
    */
   @FXML
-  public void onKeyReleased(KeyEvent event) {
+  private void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
   }
 
@@ -54,7 +55,7 @@ public class TableController {
    * @param event the mouse event
    */
   @FXML
-  public void clickDuck(MouseEvent event) {
+  private void clickDuck(MouseEvent event) {
     System.out.println("duck clicked");
     gamestate.attemptFindSafe("rubber duck");
   }
@@ -65,7 +66,7 @@ public class TableController {
    * @param event the mouse event
    */
   @FXML
-  public void clickApple(MouseEvent event) {
+  private void clickApple(MouseEvent event) {
     System.out.println("apple clicked");
     gamestate.attemptFindSafe("apple");
   }
@@ -76,7 +77,7 @@ public class TableController {
    * @param event the mouse event
    */
   @FXML
-  public void clickPencil(MouseEvent event) {
+  private void clickPencil(MouseEvent event) {
     System.out.println("pencil clicked");
     gamestate.attemptFindSafe("pencil");
   }
@@ -87,7 +88,7 @@ public class TableController {
    * @param event the mouse event
    */
   @FXML
-  public void clickScissors(MouseEvent event) {
+  private void clickScissors(MouseEvent event) {
     System.out.println("scissors clicked");
     gamestate.attemptFindSafe("scissors");
   }
@@ -98,7 +99,7 @@ public class TableController {
    * @param event the mouse event
    */
   @FXML
-  public void clickWatch(MouseEvent event) {
+  private void clickWatch(MouseEvent event) {
     System.out.println("watch clicked");
     gamestate.attemptFindSafe("watch");
   }
@@ -110,7 +111,7 @@ public class TableController {
    * @throws IOException
    */
   @FXML
-  public void switchToRoom(ActionEvent event) throws IOException {
+  private void switchToRoom(ActionEvent event) throws IOException {
     Button currentButton = (Button) event.getSource();
     Scene currentScene = currentButton.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));

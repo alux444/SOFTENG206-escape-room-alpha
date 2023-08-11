@@ -55,7 +55,6 @@ public class ChatController {
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  @FXML
   public void initialize() throws ApiProxyException {
     chatTextArea.clear();
     gamestate.setChatController(this);
@@ -96,7 +95,7 @@ public class ChatController {
    * @throws ApiProxyException
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
       onSendMessage(new ActionEvent());
     }
@@ -112,9 +111,6 @@ public class ChatController {
     int randNum = random.nextInt(11);
     System.out.println(words[randNum]);
     gamestate.setItem(words[randNum]);
-
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.65).setTopP(0.65).setMaxTokens(100);
 
     // task for concurrency when calling GPT to generate the user the riddle.
     Task<Void> completionTask =
@@ -151,7 +147,7 @@ public class ChatController {
    *
    * @param msg the chat message to append
    */
-  private void appendChatMessage(ChatMessage msg) {
+  public void appendChatMessage(ChatMessage msg) {
     String speaker = msg.getRole().equals("assistant") ? "???" : "You";
     chatTextArea.appendText(speaker + ": " + msg.getContent() + "\n\n");
     if (speaker.equals("???")) {
@@ -266,7 +262,7 @@ public class ChatController {
   }
 
   /**
-   * Public function to add message to the chat text area.
+   * Private function to add message to the chat text area.
    *
    * @param message the message content to append
    */

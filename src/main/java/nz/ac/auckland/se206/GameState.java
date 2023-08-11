@@ -321,9 +321,11 @@ public class GameState {
     // validating for any events that may have to be run.
     Task<Void> timerTask =
         new Task<Void>() {
-          // schedules a thread for the continuous decrementing of the timer, and updates all timer
-          // value indicators for the GUI
+
           @Override
+          // A task for the continuous decrementing of the timer, and updates all timer
+          // value indicators for the GUI.
+          // each seond, checks the time status for if there are any changes required.
           protected Void call() throws Exception {
             timer.scheduleAtFixedRate(
                 new TimerTask() {

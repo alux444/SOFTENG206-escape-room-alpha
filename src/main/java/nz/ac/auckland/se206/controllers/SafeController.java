@@ -88,14 +88,15 @@ public class SafeController {
 
   /**
    * Handles the key pressed event. Uses a switch case from the keyboard key pressed to result in
-   * the respective button function being run
+   * the respective button function being run. Handles using backspace to delete and enter as
+   * submit. Otherwise, any other key will do nothing.
    *
    * @param event the key event
    * @throws IOException
    * @throws ApiProxyException
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
     KeyCode keyCode = event.getCode();
     switch (keyCode) {
       case BACK_SPACE:
@@ -151,67 +152,67 @@ public class SafeController {
 
   // handles clicking of the 0
   @FXML
-  public void clickZero() {
+  private void clickZero() {
     pressNumber(0);
   }
 
   // handles clicking of the 1
   @FXML
-  public void clickOne() {
+  private void clickOne() {
     pressNumber(1);
   }
 
   // handles clicking of the 2
   @FXML
-  public void clickTwo() {
+  private void clickTwo() {
     pressNumber(2);
   }
 
   // handles clicking of the 3
   @FXML
-  public void clickThree() {
+  private void clickThree() {
     pressNumber(3);
   }
 
   // handles clicking of the 4
   @FXML
-  public void clickFour() {
+  private void clickFour() {
     pressNumber(4);
   }
 
   // handles clicking of the 5
   @FXML
-  public void clickFive() {
+  private void clickFive() {
     pressNumber(5);
   }
 
   // handles clicking of the 6
   @FXML
-  public void clickSix() {
+  private void clickSix() {
     pressNumber(6);
   }
 
   // handles clicking of the 7
   @FXML
-  public void clickSeven() {
+  private void clickSeven() {
     pressNumber(7);
   }
 
   // handles clicking of the 8
   @FXML
-  public void clickEight() {
+  private void clickEight() {
     pressNumber(8);
   }
 
   // handles clicking of the 9
   @FXML
-  public void clickNine() {
+  private void clickNine() {
     pressNumber(9);
   }
 
   // handles clicking of the delete
   @FXML
-  public void clickDel() {
+  private void clickDel() {
     if (this.code.length() > 0) {
       this.code = this.code.substring(0, this.code.length() - 1);
     }
@@ -222,7 +223,7 @@ public class SafeController {
   // checks for the correct numbers at each relative digit to green or red based on the correctness
   // of the input.
   @FXML
-  public void clickSub() throws IOException {
+  private void clickSub() throws IOException {
     System.out.println("sub");
     if (this.code.length() == 4) {
       for (int i = 0; i < 4; i++) {
@@ -276,7 +277,7 @@ public class SafeController {
 
   // switches to the room root
   @FXML
-  public void switchToBefore(ActionEvent event) {
+  private void switchToBefore(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.ROOM));
@@ -284,7 +285,7 @@ public class SafeController {
 
   // switches to the chat room
   @FXML
-  public void switchToChat(ActionEvent event) {
+  private void switchToChat(ActionEvent event) {
     Button source = (Button) event.getSource();
     Scene currentScene = source.getScene();
     currentScene.setRoot(SceneManager.getUiRoot(AppUi.CHAT));
