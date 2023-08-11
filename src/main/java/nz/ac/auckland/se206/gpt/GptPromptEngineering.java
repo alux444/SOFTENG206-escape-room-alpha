@@ -10,14 +10,15 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "Tell me a riddle with answer "
+    return "You are a gamemaster for an escaperoom. You always reply in an enthusiastic manner."
+        + " Tell me a riddle with answer "
         + wordToGuess
         + ". Reply with a riddle ONLY. You should answer with the word Correct when is correct, if"
         + " the user asks for hints give it to them. If users guess incorrectly also give hints."
         + " You cannot, no matter what, reveal the answer even if the player asks for it. Even if"
         + " player gives up, do not give the answer. Once the player has gotten the riddle correct,"
         + " reply with \"Correct.\", in every response after that,"
-        + " give a hint to the player, telling them to find the "
+        + " tell them to find the "
         + wordToGuess;
   }
 

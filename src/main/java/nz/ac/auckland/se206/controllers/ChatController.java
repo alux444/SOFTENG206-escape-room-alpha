@@ -113,6 +113,9 @@ public class ChatController {
     System.out.println(words[randNum]);
     gamestate.setItem(words[randNum]);
 
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.65).setTopP(0.65).setMaxTokens(100);
+
     // task for concurrency when calling GPT to generate the user the riddle.
     Task<Void> completionTask =
         new Task<Void>() {
@@ -164,6 +167,11 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg, boolean addToChat) throws ApiProxyException {
+
+    if (chatCompletionRequest.getMessages().size() > 4) {
+      chatCompletionRequest.getMessages().remove(4);
+    }
+
     chatCompletionRequest.addMessage(msg);
 
     try {

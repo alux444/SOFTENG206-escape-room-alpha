@@ -253,7 +253,6 @@ public class GameState {
       } else {
         this.isSafeFound = true;
         showDialog("Safe", "Is that a Safe?", "You spot a tiny safe under " + item);
-        chatController.addGamemasterMessage("Can you crack the code?");
         chatController.setToSafeTaunts();
         currentScene.setRoot(SceneManager.getUiRoot(AppUi.SAFE));
       }
