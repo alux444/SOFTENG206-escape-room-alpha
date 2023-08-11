@@ -55,10 +55,20 @@ public class ChatController {
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public void initialize() throws ApiProxyException {
-    chatTextArea.clear();
+  @FXML
+  private void initialize() throws ApiProxyException {
+
     gamestate.setChatController(this);
     gamestate.setTimeButton(timeBtnChat, "chat");
+    resetChat();
+  }
+
+  /**
+   * Resets the chat, clearing the chat if there was a previous chat. Calls to GPT for a welcome
+   * message for the player.
+   */
+  public void resetChat() {
+    chatTextArea.clear();
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.7).setTopP(0.6).setMaxTokens(100);
 

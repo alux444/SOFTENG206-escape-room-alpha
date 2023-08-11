@@ -55,10 +55,20 @@ public class SafeController {
    */
   @FXML
   private void initialize() throws IOException {
+    gamestate.setSafeController(this);
+    resetSafe();
+  }
+
+  public void resetSafe() throws IOException {
+    this.code = "";
+    this.solution = "";
+
     digitOne.setFill(Color.RED);
     digitTwo.setFill(Color.RED);
     digitThree.setFill(Color.RED);
     digitFour.setFill(Color.RED);
+    statusText.setText("");
+    codeText.setText("");
 
     gamestate.setTimeButton(timeBtnSafe, "safe");
     backgroundImage.setImage(
@@ -274,6 +284,7 @@ public class SafeController {
         backgroundImage.setImage(
             new Image(App.class.getResource("/images/safeOpen.png").openStream()));
       } else {
+        // otherwise, notify the user that they are incorrect.
         statusText.setFill(Color.RED);
         statusText.setText("INCORRECT");
       }

@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.SafeController;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -33,6 +34,7 @@ public class GameState {
 
   private Scene currentScene;
   private ChatController chatController;
+  private SafeController safeController;
 
   // button and images
   private Button timeBtnChat;
@@ -92,7 +94,8 @@ public class GameState {
     this.isGameWon = false;
     // Reinitialises the chat controller, and starts the countdown. Resets the room background
     // image.
-    chatController.initialize();
+    chatController.resetChat();
+    safeController.resetSafe();
     startCountdown();
     updateImage("room0");
     // shows the introduction dialog again.
@@ -119,6 +122,15 @@ public class GameState {
    */
   public void setChatController(ChatController controller) {
     this.chatController = controller;
+  }
+
+  /**
+   * Sets the current game's safe controller.
+   *
+   * @param controller instance of safe controller.
+   */
+  public void setSafeController(SafeController controller) {
+    this.safeController = controller;
   }
 
   /**
